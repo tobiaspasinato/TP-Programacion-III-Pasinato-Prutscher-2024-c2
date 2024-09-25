@@ -1,1 +1,10 @@
-# TP-Programacion-III-Pasinato-Prutscher-2024-c2
+# Trabajo Practico Programacion 3 (27/11)
+
+## Integrantes del grupo
+
+- Tobias Pasinato
+- Matias Prutscher
+
+## Descripción
+
+
