@@ -1,5 +1,5 @@
 // Redirecciona a productos si se ingresa un nombre
-document.getElementById('startBtn').addEventListener('click', () => {
+document.getElementById('btnLogin').addEventListener('click', () => {
     const username = document.getElementById('username').value;
     if (username.trim()) {
         alert(`Bienvenido, ${username}!`);
