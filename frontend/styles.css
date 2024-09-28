@@ -5,6 +5,7 @@ main{
     justify-content: space-around; /* en eje x */
     align-items: center; /* en eje y */
     height: 100%;
+    width: 100%;
 }
 
 body {
@@ -17,16 +18,21 @@ body {
     height: 100vh;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
+aside {
+    background-image: url('./imagen-login.webp'); 
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 100%;
+} 
+section {
+    width: 70%;
+}
 
 /* Tema Claro */
 body.light {
     background-color: #8EC4D0;
     color: #314449;
-}
-
-body.light .loading-container {
-    background-color: #97BBC6;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 body.light button {
@@ -42,11 +48,6 @@ body.light button:hover {
 body.dark {
     background-color: #314449;
     color: #8EC4D0;
-}
-
-body.dark .loading-container {
-    background-color: #364247;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 body.dark button {
@@ -115,8 +116,6 @@ body.dark a {
 body.light a {
     color: #5D3333;
 }
-
-
 
 /* Estilos del contenedor de carga */
 .loading-container {
