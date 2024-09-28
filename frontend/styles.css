@@ -25,6 +25,14 @@ aside {
     width: 100%;
     height: 100%;
 } 
+body.dark aside {
+    filter: brightness(50%); /* Reduce el brillo al 50% */
+}
+
+body.light aside {
+    filter: brightness(100%); /* Mantiene el brillo en el modo claro */
+}
+
 section {
     width: 70%;
 }
