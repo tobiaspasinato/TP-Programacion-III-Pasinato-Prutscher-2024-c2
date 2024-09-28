@@ -1,4 +1,12 @@
 /* Estilos Generales */
+
+main{
+    display: flex;
+    justify-content: space-around; /* en eje x */
+    align-items: center; /* en eje y */
+    height: 100%;
+}
+
 body {
     font-family: 'Arial', sans-serif;
     margin: 0;
@@ -23,6 +31,7 @@ body.light .loading-container {
 
 body.light button {
     background-color: #DC7474;
+    color: #314449;
 }
 
 body.light button:hover {
@@ -42,6 +51,7 @@ body.dark .loading-container {
 
 body.dark button {
     background-color: #5D3333;
+    color: #8EC4D0;
 }
 
 body.dark button:hover {
