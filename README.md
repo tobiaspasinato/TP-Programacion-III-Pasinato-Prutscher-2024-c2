@@ -28,3 +28,8 @@
 | D37D7E      | 583535     |
 | DC7474 (rojo)    | 5D3333 (rojo)     |
 
+Light Color
+![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/8effe355-93f9-4280-ad81-0cff801be2b7/977429fd-c564-42a3-8243-3ca5cb5047a5/c1c4bba1-33b0-43f7-b8cb-f56d00d74150.png)
+
+Dark Color
+![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/8effe355-93f9-4280-ad81-0cff801be2b7/5962142e-25bf-49d4-a40f-8d3b6918369c/image.png)
