@@ -31,7 +31,7 @@ themeToggleBtn.addEventListener('click', () => {
 });
 
 // Al cargar la página, aplicamos el tema oscuro por defecto
-document.body.classList.add('light');
+document.body.classList.add('dark');
 
 // Agrega el ícono del sol al botón al cargar la página
 const iconMoon = document.createElement('span');
