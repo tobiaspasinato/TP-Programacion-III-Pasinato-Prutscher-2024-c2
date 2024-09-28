@@ -98,6 +98,16 @@ body.light .theme-toggle .icon-moon {
     display: none;
 }
 
+body.dark a {
+    color: #DC7474;
+}
+
+body.light a {
+    color: #5D3333;
+}
+
+
+
 /* Estilos del contenedor de carga */
 .loading-container {
     text-align: center;
