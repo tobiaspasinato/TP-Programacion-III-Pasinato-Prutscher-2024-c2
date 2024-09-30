@@ -1,11 +1,7 @@
 // Redirecciona a productos si se ingresa un nombre
 document.getElementById('btnLogin').addEventListener('click', () => {
-    const username = document.getElementById('username').value;
-    if (username.trim()) {
-        alert(`Bienvenido, ${username}!`);
-        window.location.href = 'productos.html'; // Redirige a la página de productos
-    } else {
-        alert('Por favor, ingrese un nombre para continuar.');
+    if (document.getElementById('inputNombreUsuario').value !== '') {
+        window.location.href = './Home/home.html'; // Redirige a la página de inicio
     }
 });
 
