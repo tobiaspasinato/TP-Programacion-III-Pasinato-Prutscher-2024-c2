@@ -147,6 +147,26 @@ h1 {
     margin-bottom: 20px;
 }
 
+body.dark #btnLoginAdmin {
+    background-color: #5D3333;
+    color: #8EC4D0;
+}
+
+body.light #btnLoginAdmin {
+    background-color: #DC7474;
+    color: #314449;
+}
+
+body.dark #btnBack {
+    background-color: #5D3333;
+    color: #8EC4D0;
+}
+
+body.light #btnBack {
+    background-color: #DC7474;
+    color: #314449;
+}
+
 /* Estilos de los inputs */
 input {
     padding: 12px;
