@@ -3,7 +3,7 @@ document.getElementById('btnBack').addEventListener('click', () => {
 });
 
 document.getElementById('btnLoginAdmin').addEventListener('click', () => {
-    if (document.getElementById('inputNombreUsuario').value !== '' && document.getElementById('inputContrasena').value !== '') {
+    if ((document.getElementById('inputNombreUsuarioAdmin').value !== '') && (document.getElementById('inputContraAdmin').value !== '')) {
         window.location.href = './Home/home.html'; // Redirige a la página de inicio
     }
 });
