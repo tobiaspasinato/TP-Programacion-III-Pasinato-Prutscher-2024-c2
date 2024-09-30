@@ -2,6 +2,12 @@ document.getElementById('btnBack').addEventListener('click', () => {
     window.location.href = '../index.html'; // Redirige a la página de inicio
 });
 
+document.getElementById('btnLoginAdmin').addEventListener('click', () => {
+    if (document.getElementById('inputNombreUsuario').value !== '' && document.getElementById('inputContrasena').value !== '') {
+        window.location.href = './Home/home.html'; // Redirige a la página de inicio
+    }
+});
+
 // Alterna entre tema claro y oscuro
 const themeToggleBtn = document.getElementById('themeToggleBtn');
 themeToggleBtn.addEventListener('click', () => {
