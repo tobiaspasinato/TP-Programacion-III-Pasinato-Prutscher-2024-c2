@@ -35,6 +35,8 @@ body.light aside {
 
 section {
     width: 70%;
+    padding: 50px;
+    margin: 50px;
 }
 
 /* Tema Claro */
