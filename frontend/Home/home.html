@@ -1,10 +1,71 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>Home</title>
-        <link rel="stylesheet" href="../styles.css">
-    </head>
-    <body>
-        <a href="../index.html">Home</a>
-    </body>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Home</title>
+    <link rel="icon" href="../favicon.png" id="logo">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mulish&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles_home.css">
+  </head>
+  <body>
+    <nav>
+      <div class="sidebar-top">
+        <span class="expand-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" 
+            width="24" height="24" viewBox="0 0 24 24" stroke-width="3" stroke="white" fill="none" 
+            stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+            <path d="M15 6l-6 6l6 6"></path>
+          </svg>
+        </span>            
+        <a href="../">
+          <img src="../Logo-Timeless-Pixel.webp" class="logo" alt="Timeless Pixel Logo">
+        </a>          
+        <h3 class="hide">Timeless Pixel</h3>
+      </div>
+      <div class="sidebar-links">
+        <ul>
+          <li>
+            <a href="#consolas" class="active" title="Consolas link">
+              <div class="icon">
+                <img src="https://cdn-icons-png.flaticon.com/512/39/39596.png" title="Consolas Icon">
+              </div>
+              <span class="link hide">Consolas</span>
+            </a>
+          </li>
+          <li>
+            <a href="#videojuegos" title="videojuegos link">
+              <div class="icon">
+                <img src="./videojuegos.png" title="Analytics Icon">
+              </div>
+              <span class="link hide">Videojuegos</span>
+            </a>
+          </li>
+          <li>
+            <a href="#carrito" title="carrito Link">
+              <div class="icon">
+                <img src="./carrito-de-compras.png" title="carrito Icon">
+              </div>
+              <span class="link hide">Carrito</span>
+            </a>
+          </li>
+          <li>
+            <a href="../LoginAdmin/log_admin.html" title="Admin Link">
+              <div class="icon">
+                <img src="./candado.png" title="Admin Icon">
+              </div>
+              <span class="link hide">Admin</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <script src="scripts_home.js"></script>
+    <div class="theme-toggle" id="themeToggleBtn">
+      <span class="icon-sun">&#9790;</span> <!-- Ícono de luna -->
+    </div>
+    <script type="module" src="../scripts.js"></script>
+  </body>
 </html>
