@@ -12,7 +12,7 @@ main{
     align-items: center; /* en eje y */
     height: 100%;
     width: 100%;
-    background-image: url('./imagen-login.webp'); 
+    background-image: url('./assets/imagen-login.webp'); 
     background-size: cover;
     background-repeat: no-repeat;
 }
