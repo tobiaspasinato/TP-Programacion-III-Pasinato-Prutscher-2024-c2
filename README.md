@@ -34,8 +34,44 @@ Light Color
 Dark Color
 ![Tinkercad](./ArchivosReadme/dark.png)
 
-Estructura de archivos:
 
-# TP-Programacion-III-Pasinato-Prutscher.2024-c2
 
-TP-Programacion-III-Pasinato-Prutscher.2024-c2 | |-/ArchivosReadme | | | |-dark.png | |-light.png | |-/frontend | | | |-/assets | | | | | |-candado.png | | |-carrito-de-compras.png | | |-favicon.png | | |-imagen-login.webp | | |-Logo-Timeless_Pixel.webp | | |-videojuegos.png | | | |-/Home | | | | | |-home.html | | |-scritps_home.js | | |-styles_home.css | |-/LoginAdmin | | | | | |-log_admin.html | | |-scripts_login_admin.js | | | |-fonts.css | |-index.html | |-scripts.js | |-styles.css | |-/backend | | | |-main.js | |-Readme.md
+# Estructura de archivos:
+
+TP-Programacion-III-Pasinato-Prutscher.2024-c2
+|
+|->/ArchivosReadme
+|	|
+|	|-> dark.png
+|	|-> light.png
+|	
+|->/frontend
+|	|
+|	|->/assets
+|	|	|
+|	|	|->candado.png
+|	|	|->carrito-de-compras.png
+|	|	|->favicon.png
+|	|	|->imagen-login.webp
+|	|	|->Logo-Timeless_Pixel.webp
+|	|	|->videojuegos.png
+|	|
+|	|->/Home
+|	|	|
+|	|	|->home.html
+|	|	|->scritps_home.js
+|	|	|->styles_home.css
+|	|->/LoginAdmin
+|	|	|
+|	|	|->log_admin.html
+|	|	|->scripts_login_admin.js
+|	|
+|	|->fonts.css
+|	|->index.html
+|	|->scripts.js
+|	|->styles.css
+|->/backend
+|	|
+|	|->main.js
+|
+|->Readme.md
