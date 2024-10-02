@@ -1,4 +1,10 @@
 /* Estilos Generales */
+.logo {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+}
 
 main{
     display: flex;
@@ -145,6 +151,10 @@ body.light a {
 h1 {
     font-size: 2rem;
     margin-bottom: 20px;
+    font-family: 'Sixtyfour Convergence', sans-serif;
+}
+h2 {
+    font-family: 'Sixtyfour Convergence', sans-serif;
 }
 
 body.dark #btnLoginAdmin {
