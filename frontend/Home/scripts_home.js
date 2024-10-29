@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
   ];
 
   const productList = document.getElementById('product-list');
-  const itemsPerPage = 3;
+  const itemsPerPage = 6;
   let currentPage = 1;
   let filteredProducts = products;
 
@@ -84,6 +84,8 @@ document.addEventListener("DOMContentLoaded", () => {
             <button class="btn btn-danger">-</button>
             <span>1</span>
             <button class="btn btn-success">+</button>
+            <br></br>
+            <button class="btn btn-primary">Agregar al carrito</button>
           </div>
         </div>
       `;
