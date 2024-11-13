@@ -7,7 +7,10 @@ console.log(process.env);
 const bodyParser = require("body-parser");
 app.use(bodyParser.json());
 
-const mainRoutes = require('./routes/main.routes');
+const mainRoutes = require('./routes/videogames.routes');
+app.use('/', mainRoutes);
+
+const mainRoutes = require('./routes/consolas.routes');
 app.use('/', mainRoutes);
 
 app.listen(process.env.PORT || 3000, () => {
