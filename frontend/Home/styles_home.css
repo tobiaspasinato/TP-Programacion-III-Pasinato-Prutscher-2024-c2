@@ -1,9 +1,21 @@
 :root {
-    /* Colores claros */
+    /* Colores */
     --primary-color: #8EC4D0; /* Celeste */
-    --primary-color-dark: #97BBC6; /* Celeste */
+    --primary-color-dark: #97BBC6; /* Celeste oscuro */
     --button-color: #DC7474; /* Rojo */
     --button-color-shadow: #DC747430; /* Rojo con opacidad */
+    --background-light: #8EC4D0c2; /* Fondo claro */
+    --text-light: #314449; /* Texto claro */
+    --button-hover-light: #CB8688; /* Botón hover claro */
+    --background-dark: #314449c2; /* Fondo oscuro */
+    --text-dark: #8EC4D0; /* Texto oscuro */
+    --button-dark: #5D3333; /* Botón oscuro */
+    --button-hover-dark: #583535; /* Botón hover oscuro */
+    --card-light: #ffffff; /* Tarjeta clara */
+    --card-dark: #2c3e50; /* Tarjeta oscura */
+    --card-text-dark: #ecf0f1; /* Texto de tarjeta oscura */
+    --theme-toggle-light: #DC7474; /* Botón de cambio de tema claro */
+    --theme-toggle-dark: #5D3333; /* Botón de cambio de tema oscuro */
 }
 
 * {
@@ -172,17 +184,17 @@ body.collapsed .expand-btn {
 
 /* Tema Claro */
 body.light {
-    background-color: #8EC4D0c2;
-    color: #314449;
+    background-color: var(--background-light);
+    color: var(--text-light);
 }
 
 body.light button {
-    background-color: #DC7474;
-    color: #314449;
+    background-color: var(--button-color);
+    color: var(--text-light);
 }
 
 body.light button:hover {
-    background-color: #CB8688;
+    background-color: var(--button-hover-light);
 }
 
 #sidebar.light {
@@ -199,27 +211,27 @@ body.light button:hover {
 }
 
 body.light .product-card {
-    background-color: #8EC4D0;
+    background-color: var(--primary-color);
 }
 
 body.light .card {
-    background-color: #ffffff; 
-    color: #314449; 
+    background-color: var(--card-light); 
+    color: var(--text-light); 
 }
 
 /* Tema Oscuro */
 body.dark {
-    background-color: #314449c2;
-    color: #8EC4D0;
+    background-color: var(--background-dark);
+    color: var(--text-dark);
 }
 
 body.dark button {
-    background-color: #5D3333;
-    color: #8EC4D0;
+    background-color: var(--button-dark);
+    color: var(--text-dark);
 }
 
 body.dark button:hover {
-    background-color: #583535;
+    background-color: var(--button-hover-dark);
 }
 
 #sidebar.dark {
@@ -227,7 +239,7 @@ body.dark button:hover {
     top: 0;
     left: 0;
     height: 100vh;
-    background-color: #314449c2;
+    background-color: var(--background-dark);
     width: 18rem;
     padding: 1.8rem 0.85rem;
     display: flex;
@@ -236,12 +248,12 @@ body.dark button:hover {
 }
 
 body.dark .product-card {
-    background-color: #314449c2;
+    background-color: var(--background-dark);
 }
 
 body.dark .card {
-    background-color: #2c3e50; 
-    color: #ecf0f1; 
+    background-color: var(--card-dark); 
+    color: var(--card-text-dark); 
 }
 
 /* Botón de cambio de tema redondo dentro del recuadro */
@@ -249,7 +261,7 @@ body.dark .card {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background-color: #DC7474;
+    background-color: var(--theme-toggle-light);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -262,7 +274,7 @@ body.dark .card {
 }
 
 .theme-toggle:hover {
-    background-color: #CB8688;
+    background-color: var(--button-hover-light);
     transform: rotate(45deg); 
 }
 
@@ -275,7 +287,7 @@ body.dark .card {
 
 /* Cuando esté en tema oscuro */
 body.dark .theme-toggle {
-    background-color: #5D3333;
+    background-color: var(--theme-toggle-dark);
 }
 
 body.dark .theme-toggle .icon-sun {
@@ -295,11 +307,11 @@ body.light .theme-toggle .icon-moon {
 }
 
 body.dark a {
-    color: #DC7474;
+    color: var(--button-color);
 }
 
 body.light a {
-    color: #5D3333;
+    color: var(--button-dark);
 }
 
 .product-card img {
@@ -367,21 +379,21 @@ a:hover {
 }
 
 body.light #paginacion button {
-    background-color: #DC7474;
-    color: #314449;
+    background-color: var(--button-color);
+    color: var(--text-light);
 }
 
 body.light #paginacion button:hover {
-    background-color: #CB8688;
+    background-color: var(--button-hover-light);
 }
 
 body.dark #paginacion button {
-    background-color: #5D3333;
-    color: #8EC4D0;
+    background-color: var(--button-dark);
+    color: var(--text-dark);
 }
 
 body.dark #paginacion button:hover {
-    background-color: #583535;
+    background-color: var(--button-hover-dark);
 }
 
 /* Responsividad */
