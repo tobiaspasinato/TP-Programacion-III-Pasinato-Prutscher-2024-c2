@@ -77,15 +77,20 @@ document.addEventListener("DOMContentLoaded", () => {
     productsToShow.forEach(product => {
       const productCard = `
         <div class="col-md-4">
-          <div class="product-card">
-            <img src="${product.img}" alt="${product.name}">
-            <h5>${product.name}</h5>
-            <p>${product.price}</p>
-            <button class="btn btn-danger">-</button>
-            <span>1</span>
-            <button class="btn btn-success">+</button>
-            <br></br>
-            <button class="btn btn-primary">Agregar al carrito</button>
+          <div class="card mb-4 shadow-sm">
+            <img src="${product.img}" class="card-img-top" alt="${product.name}">
+            <div class="card-body">
+              <h5 class="card-title">${product.name}</h5>
+              <p class="card-text">${product.price}</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button class="btn btn-sm btn-outline-danger">-</button>
+                  <span class="mx-2">1</span>
+                  <button class="btn btn-sm btn-outline-success">+</button>
+                </div>
+                <button class="btn btn-sm btn-primary">Agregar al carrito</button>
+              </div>
+            </div>
           </div>
         </div>
       `;
