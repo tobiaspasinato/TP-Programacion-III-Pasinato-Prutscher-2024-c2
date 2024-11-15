@@ -16,12 +16,10 @@
 	padding: 0;
 	box-sizing: border-box;
 }
-h1{
-
-}
-
-#logo{
-
+#titulo {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    font-family: 'Sixtyfour Convergence', sans-serif;
 }
 
 body {
@@ -53,7 +51,8 @@ body {
 }
 
 #header img {
-	max-height: 50px;
+	max-width: 150px;
+	border-radius: 10%;
 }
 
 /* Aside */
