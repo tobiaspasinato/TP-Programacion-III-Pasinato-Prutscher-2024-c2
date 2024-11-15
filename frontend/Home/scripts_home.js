@@ -1,28 +1,51 @@
 document.addEventListener("DOMContentLoaded", () => {
   const expand_btn = document.querySelector(".expand-btn");
+  const allLinks = document.querySelectorAll(".sidebar-links a");
+  const pagarContainer = document.getElementById("pagar-container");
+  const themeToggleBtn = document.getElementById("themeToggleBtn");
+  const productList = document.getElementById('product-list');
+  const prevPageBtn = document.getElementById('prevPage');
+  const nextPageBtn = document.getElementById('nextPage');
+  const pagarBtn = document.getElementById("pagarBtn");
+
+  const products = [
+    { name: 'Playstation 1', price: '$100', img: 'https://upload.wikimedia.org/wikipedia/commons/9/95/PSX-Console-wController.png', category: 'consolas' },
+    { name: 'Playstation 2', price: '$150', img: 'https://w7.pngwing.com/pngs/98/809/png-transparent-playstation-2-playstation-3-super-nintendo-entertainment-system-video-game-consoles-playstation-2-game-electronics-gadget-thumbnail.png', category: 'consolas' },
+    { name: 'Playstation 3', price: '$200', img: 'https://e7.pngegg.com/pngimages/948/199/png-clipart-playstation-3-playstation-2-playstation-4-video-game-consoles-sony-playstation-game-electronics.png', category: 'consolas' },
+    { name: 'Crash Bandicoot', price: '$60', img: 'https://i.3djuegos.com/juegos/10692/crash_bandicoot/fotos/ficha/crash_bandicoot-2464077.jpg', category: 'videojuegos' },
+    { name: 'The Last of Us', price: '$70', img: 'https://www.portalgames.com.ar/wp-content/uploads/2020/03/The_Last_of_US.jpg', category: 'videojuegos' },
+    { name: 'EA Sports FC 25', price: '$150', img: 'https://www.clarin.com/2024/07/17/ORRRfEnDj_720x0__1.jpg', category: 'videojuegos' },
+    { name: 'Nintendo Switch', price: '$300', img: 'https://http2.mlstatic.com/D_NQ_NP_845205-MLA70414548864_072023-O.webp', category: 'consolas' }
+  ];
+
+  const itemsPerPage = 6;
+  let currentPage = 1;
+  let filteredProducts = products;
 
   expand_btn.addEventListener("click", () => {
     document.body.classList.toggle("collapsed");
   });
 
-  const allLinks = document.querySelectorAll(".sidebar-links a");
-
   allLinks.forEach((elem) => {
     elem.addEventListener('click', function (e) {
-      e.preventDefault(); // Evitar comportamiento predeterminado del enlace
+      e.preventDefault();
       const hrefLinkClick = elem.href;
       allLinks.forEach((link) => {
-        link.classList.remove('active'); 
+        link.classList.remove('active');
       });
-      elem.classList.add("active"); 
+      elem.classList.add("active");
 
-      // Llama al filtro de productos según el enlace clicado
-      const category = elem.getAttribute('href').substring(1); // Elimina el '#'
+      const category = elem.getAttribute('href').substring(1);
       filterProducts(category);
+
+      if (category === 'carrito') {
+        pagarContainer.classList.remove('d-none');
+      } else {
+        pagarContainer.classList.add('d-none');
+      }
     });
   });
 
-  const themeToggleBtn = document.getElementById("themeToggleBtn");
   themeToggleBtn.addEventListener("click", () => {
     if (document.body.classList.contains("dark")) {
       document.body.classList.remove("dark");
@@ -45,23 +68,6 @@ document.addEventListener("DOMContentLoaded", () => {
   iconMoon.innerHTML = '&#9728;';
   themeToggleBtn.appendChild(iconMoon);
 
-  // Productos
-  const products = [
-    { name: 'Playstation 1', price: '$100', img: 'https://upload.wikimedia.org/wikipedia/commons/9/95/PSX-Console-wController.png', category: 'consolas' },
-    { name: 'Playstation 2', price: '$150', img: 'https://w7.pngwing.com/pngs/98/809/png-transparent-playstation-2-playstation-3-super-nintendo-entertainment-system-video-game-consoles-playstation-2-game-electronics-gadget-thumbnail.png', category: 'consolas' },
-    { name: 'Playstation 3', price: '$200', img: 'https://e7.pngegg.com/pngimages/948/199/png-clipart-playstation-3-playstation-2-playstation-4-video-game-consoles-sony-playstation-game-electronics.png', category: 'consolas' },
-    { name: 'Crash Bandicoot', price: '$60', img: 'https://i.3djuegos.com/juegos/10692/crash_bandicoot/fotos/ficha/crash_bandicoot-2464077.jpg', category: 'videojuegos' },
-    { name: 'The Last of Us', price: '$70', img: 'https://www.portalgames.com.ar/wp-content/uploads/2020/03/The_Last_of_US.jpg', category: 'videojuegos' },
-    { name: 'EA Sports FC 25', price: '$150', img: 'https://www.clarin.com/2024/07/17/ORRRfEnDj_720x0__1.jpg', category: 'videojuegos' },
-    { name: 'Nintendo Switch', price: '$300', img: 'https://http2.mlstatic.com/D_NQ_NP_845205-MLA70414548864_072023-O.webp', category: 'consolas' }
-  ];
-
-  const productList = document.getElementById('product-list');
-  const itemsPerPage = 6;
-  let currentPage = 1;
-  let filteredProducts = products;
-
-  // Función para renderizar productos
   function renderProducts() {
     productList.innerHTML = '';
 
@@ -98,20 +104,15 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Función para filtrar productos
   function filterProducts(category) {
     if (category === 'todos') {
-      filteredProducts = products;  // Muestra todos los productos
+      filteredProducts = products;
     } else {
       filteredProducts = products.filter(product => product.category === category);
     }
-    currentPage = 1;  // Reinicia a la primera página al cambiar de filtro
+    currentPage = 1;
     renderProducts();
   }
-
-  // Botones de paginación
-  const prevPageBtn = document.getElementById('prevPage');
-  const nextPageBtn = document.getElementById('nextPage');
 
   prevPageBtn.addEventListener('click', () => {
     if (currentPage > 1) {
@@ -127,6 +128,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Render inicial (muestra todos los productos)
   filterProducts('todos');
+
+  pagarBtn.addEventListener("click", () => {
+    window.location.href="./Ticket/ticket.html"
+  });
 });
