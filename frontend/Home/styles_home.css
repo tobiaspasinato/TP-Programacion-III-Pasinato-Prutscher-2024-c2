@@ -22,21 +22,23 @@
     margin: 0;
     padding: 0;
 }
-html{
+
+html {
     height: 100%;
     width: 100%;
-    background-image: url('../assets/imagen-login.webp'); 
+    background-image: url('../assets/imagen-login.webp');
     background-size: cover;
     background-repeat: no-repeat;
-    backdrop-filter: brightness(50%);
-    backdrop-filter: blur(5px);
+    backdrop-filter: brightness(50%) blur(5px);
 }
+
 body {
     font-family: Mulish, sans-serif;
     overflow: hidden;
     display: flex;
     position: fixed;
     background-size: 100%;
+    width: 100%;
 }
 
 .background {
@@ -47,9 +49,8 @@ body {
     display: grid;
     place-items: center;
     opacity: 0.5;
-    background-size: 100%;
-    background-repeat: no-repeat;
     background-size: auto;
+    background-repeat: no-repeat;
 }
 
 main {
@@ -108,35 +109,19 @@ main {
     block-size: 80%;
 }
 
-.sidebar-links ul {
-    list-style-type: none;
-    position: relative;
-    padding-left: 0;
-}
-
-.sidebar-links li {
-    position: relative;
-}
-
-.sidebar-links li a {
-    padding: 0.5rem;
-    font-size: 1.25rem;
-    display: flex;
-    align-items: center;
-    height: 3.5rem;
-    text-decoration: none;
-}
-
+.sidebar-links ul,
 .sidebar-bottom ul {
     list-style-type: none;
     position: relative;
     padding-left: 0;
 }
 
+.sidebar-links li,
 .sidebar-bottom li {
     position: relative;
 }
 
+.sidebar-links li a,
 .sidebar-bottom li a {
     padding: 0.5rem;
     font-size: 1.25rem;
@@ -183,10 +168,6 @@ body.collapsed .expand-btn {
     transform: rotate(-180deg);
 }
 
-
-body {
-    width: 100%;
-}
 /* Tema Claro */
 body.light {
     background-color: var(--background-light);
@@ -320,8 +301,6 @@ body.light a {
     color: var(--button-dark);
 }
 
-
-
 h2 {
     font-family: 'Sixtyfour Convergence', sans-serif;
 }
@@ -335,7 +314,6 @@ a:hover {
     height: 150px;
     object-fit: cover;
 }
-
 
 #paginacion {
     display: flex;
@@ -391,17 +369,17 @@ body.dark #paginacion button:hover {
 
 /* Responsividad */
 @media (max-width: 1000px) {
-
     .col-md-4 {
         width: 35% !important;
     }
-    * ::after, * ::before { 
+    *::after, *::before {
         box-sizing: content-box;
     }
     #product-list {
         justify-content: space-evenly;
     }
 }
+
 .col-md-4 {
     flex: auto !important;
     max-width: 20em !important;
