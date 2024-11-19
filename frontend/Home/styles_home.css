@@ -21,14 +21,22 @@
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
 }
-
+html{
+    height: 100%;
+    width: 100%;
+    background-image: url('../assets/imagen-login.webp'); 
+    background-size: cover;
+    background-repeat: no-repeat;
+    backdrop-filter: brightness(50%);
+    backdrop-filter: blur(5px);
+}
 body {
     font-family: Mulish, sans-serif;
     overflow: hidden;
     display: flex;
     position: fixed;
+    background-size: 100%;
 }
 
 .background {
@@ -175,13 +183,10 @@ body.collapsed .expand-btn {
     transform: rotate(-180deg);
 }
 
-.product-card {
-    padding: 10px;
-    text-align: center;
-    display: block;
-    block-size: 97%;
-}
 
+body {
+    width: 100%;
+}
 /* Tema Claro */
 body.light {
     background-color: var(--background-light);
@@ -315,10 +320,7 @@ body.light a {
     color: var(--button-dark);
 }
 
-.product-card img {
-    max-width: 50%;
-    height: 50%;
-}
+
 
 h2 {
     font-family: 'Sixtyfour Convergence', sans-serif;
@@ -329,36 +331,15 @@ a:hover {
     border-radius: 0.625rem;
 }
 
-.card {
-    height: 350px;
-    display: flex;
-    flex-direction: column;
-}
-
 .card-img-top {
     height: 150px;
     object-fit: cover;
 }
 
-.card-body {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-.card-title,
-.card-text {
-    margin-bottom: 10px;
-}
-
-.btn-group {
-    margin-bottom: 10px;
-}
 
 #paginacion {
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
     margin-top: 20px;
     position: fixed;
     bottom: 20px;
@@ -409,31 +390,19 @@ body.dark #paginacion button:hover {
 }
 
 /* Responsividad */
-@media (max-width: 768px) {
-    .card {
-        height: auto;
-    }
+@media (max-width: 1000px) {
 
-    .card-img-top {
-        height: 100px;
+    .col-md-4 {
+        width: 35% !important;
     }
-
-    .card-body {
-        padding: 10px;
+    * ::after, * ::before { 
+        box-sizing: content-box;
     }
-
-    .btn-group {
-        flex-direction: column;
-        align-items: center;
+    #product-list {
+        justify-content: space-evenly;
     }
-
-    .btn-group button {
-        margin-bottom: 5px;
-    }
-
-    
 }
 .col-md-4 {
-    flex: 0 0 auto;
-    max-width: 20em;
+    flex: auto !important;
+    max-width: 20em !important;
 }

@@ -4,7 +4,7 @@ document.getElementById('btnBack').addEventListener('click', () => {
 
 document.getElementById('btnLoginAdmin').addEventListener('click', () => {
     if ((document.getElementById('inputNombreUsuarioAdmin').value !== '') && (document.getElementById('inputContraAdmin').value !== '')) {
-        window.location.href = './Home/home.html'; // Redirige a la página de inicio
+        window.location.href="../Home/Admin/home_admin.html"; // Redirige a la página de inicio
     }
 });
 
