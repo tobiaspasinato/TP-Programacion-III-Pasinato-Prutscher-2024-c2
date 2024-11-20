@@ -3,9 +3,14 @@ document.getElementById('btnBack').addEventListener('click', () => {
 });
 
 document.getElementById('btnLoginAdmin').addEventListener('click', () => {
+    /*
+    console.log(document.getElementById('inputNombreUsuarioAdmin').value);
+    console.log(document.getElementById('inputContraAdmin').value);
     if ((document.getElementById('inputNombreUsuarioAdmin').value !== '') && (document.getElementById('inputContraAdmin').value !== '')) {
         window.location.href="../Home/Admin/home_admin.html"; // Redirige a la página de inicio
     }
+        */
+    window.location.href="../Home/Admin/home_admin.html"; // Redirige a la página de inicio
 });
 
 // Alterna entre tema claro y oscuro
