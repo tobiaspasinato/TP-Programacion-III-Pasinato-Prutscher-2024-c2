@@ -8,13 +8,14 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Sixtyfour+Convergence&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
     </head>
     <body>
         <main>
             <section>
                 <input id="btnBack" type="submit" value="Back to Log In">
                 <h1>Timeless Pixel</h1>
-                <form method="post">
+                <form id="loginForm" method="post">
                     <div class="username">
                         <label>Usuario</label>
                         <input id="inputNombreUsuarioAdmin" type="text" required>
@@ -31,6 +32,7 @@
             <div class="theme-toggle" id="themeToggleBtn">
                 <span class="icon-sun">&#9790;</span> <!-- Ícono de luna -->
             </div>
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
             <script type="module" src="scripts_login_admin.js"></script>
         </main>
         <footer>

@@ -2,15 +2,20 @@ document.getElementById('btnBack').addEventListener('click', () => {
     window.location.href = '../index.html'; // Redirige a la página de inicio
 });
 
-document.getElementById('btnLoginAdmin').addEventListener('click', () => {
-    /*
-    console.log(document.getElementById('inputNombreUsuarioAdmin').value);
-    console.log(document.getElementById('inputContraAdmin').value);
-    if ((document.getElementById('inputNombreUsuarioAdmin').value !== '') && (document.getElementById('inputContraAdmin').value !== '')) {
-        window.location.href="../Home/Admin/home_admin.html"; // Redirige a la página de inicio
+document.getElementById('loginForm').addEventListener('submit', (event) => {
+    const username = document.getElementById('inputNombreUsuarioAdmin').value;
+    const password = document.getElementById('inputContraAdmin').value;
+
+    if (username === 'admin' && password === '123') {
+        window.location.href= '../Home/Admin/home_admin.html'; // Redirige al home del admin
+    } else {
+        Swal.fire({
+            icon: 'error',
+            title: 'Error de autenticación',
+            text: 'Usuario o contraseña incorrectos'
+        }); //alert mas lindo? dudoso pero bueno despues lo cambio por otro mejor
+        event.preventDefault(); // Evita que el formulario se envíe
     }
-        */
-    window.location.href="../Home/Admin/home_admin.html"; // Redirige a la página de inicio
 });
 
 // Alterna entre tema claro y oscuro
