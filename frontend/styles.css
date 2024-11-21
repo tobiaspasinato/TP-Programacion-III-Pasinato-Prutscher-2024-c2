@@ -244,3 +244,11 @@ button:focus {
         height: auto;
     }
 }
+
+.swal2-confirm-retro {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Sixtyfour Convergence', sans-serif;
+    padding: 10px 20px;
+}

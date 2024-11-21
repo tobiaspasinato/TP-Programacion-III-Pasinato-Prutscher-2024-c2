@@ -315,13 +315,18 @@ a:hover {
     object-fit: cover;
 }
 
+#product-list {
+    margin-bottom: 100px; 
+}
+
 #paginacion {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
     margin-top: 20px;
     position: fixed;
     bottom: 20px;
     width: 100%;
+    z-index: 1000; 
 }
 
 #paginacion button {
@@ -329,7 +334,7 @@ a:hover {
     color: white;
     border: none;
     padding: 10px 20px;
-    margin: 0 5px;
+    margin: 0 5%;
     cursor: pointer;
     border-radius: 5px;
     transition: background-color 0.3s ease;
@@ -383,4 +388,8 @@ body.dark #paginacion button:hover {
 .col-md-4 {
     flex: auto !important;
     max-width: 20em !important;
+}
+
+.hidden {
+    display: none;
 }

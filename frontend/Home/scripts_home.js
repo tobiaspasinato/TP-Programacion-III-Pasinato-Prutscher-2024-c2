@@ -40,8 +40,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (category === 'carrito') {
         pagarContainer.classList.remove('d-none');
+        hidePaginationButtons();
       } else {
         pagarContainer.classList.add('d-none');
+        showPaginationButtons();
       }
     });
   });
@@ -133,4 +135,14 @@ document.addEventListener("DOMContentLoaded", () => {
   pagarBtn.addEventListener("click", () => {
     window.location.href="./Ticket/ticket.html"
   });
+
+  function hidePaginationButtons() {
+    if (prevPageBtn) prevPageBtn.style.display = 'none';
+    if (nextPageBtn) nextPageBtn.style.display = 'none';
+  }
+
+  function showPaginationButtons() {
+    if (prevPageBtn) prevPageBtn.style.display = 'block';
+    if (nextPageBtn) nextPageBtn.style.display = 'block';
+  }
 });
