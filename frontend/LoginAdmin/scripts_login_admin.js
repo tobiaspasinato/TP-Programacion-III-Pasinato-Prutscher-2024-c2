@@ -13,14 +13,14 @@ document.getElementById('loginForm').addEventListener('submit', (event) => {
     } else {
         Swal.fire({
             icon: 'error',
-            title: '<h4 style="color: #ff4040; font-family: Sixtyfour Convergence, sans-serif;">Error de autenticación</h4>',
+            title: '<h4>Error de autenticación</h4>',
             html: `
-                <p style="color: #fff; font-family: Sixtyfour Convergence, sans-serif;">Usuario o contraseña incorrectos</p>
+                <p>Usuario o contraseña incorrectos</p>
                 <img src="https://media.tenor.com/8TsyGKoXGVIAAAAM/spongebob-squarepants-spongebob.gif" alt="nyan cat" style="width:100%; max-width:200px; margin-top: 10px;" />
             `,
             background: '#2b2b2b', 
             confirmButtonColor: '#d33',
-            confirmButtonText: '<span style="color: #fff; font-family: Sixtyfour Convergence, sans-serif;">OK</span>',
+            confirmButtonText: '<span>OK</span>',
             showClass: {
                 popup: 'animate__animated animate__fadeInDown'
             },
