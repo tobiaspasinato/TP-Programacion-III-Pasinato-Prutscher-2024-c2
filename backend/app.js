@@ -29,11 +29,8 @@ app.get("/", (req, res) => {
     res.send("Estas en el Main");
 });
 
-const gameRoutes = require('./routes/game.routes.js');
-app.use('/game', gameRoutes);
-
-const consoleRoutes = require('./routes/console.routes.js');
-app.use('/console', consoleRoutes);
+const productosRoutes = require('./routes/producto.routes.js');
+app.use('/productos', productosRoutes);
 
 app.listen(process.env.PORT, () => {
     console.log(`Server is running on port ${process.env.PORT}`);

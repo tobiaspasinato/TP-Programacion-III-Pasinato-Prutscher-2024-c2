@@ -1,4 +1,4 @@
-const comprobarIDconsole = function (req, res, next) {
+const comprobarID = function (req, res, next) {
     const id = req.query.id;
     if (id !== undefined) {
         next();
@@ -13,6 +13,6 @@ const otroMiddleware = function (req, res, next) {
 };
 
 module.exports = {
-    comprobarIDconsole,
+    comprobarID,
     otroMiddleware
 };
