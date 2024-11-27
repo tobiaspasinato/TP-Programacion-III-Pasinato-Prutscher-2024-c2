@@ -1,5 +1,5 @@
 const comprobarID = function (req, res, next) {
-    const id = req.query.id;
+    const id = req.params.id;
     if (id !== undefined) {
         next();
     } else {

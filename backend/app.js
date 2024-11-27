@@ -7,6 +7,8 @@ app.use(bodyParser.json());
 require("dotenv").config();
 //console.log(process.env);
 
+const productoSequelize = require('./entity/productoEntity.js');
+
 const ejs = require("ejs");
 const path = require("path");
 
@@ -28,6 +30,14 @@ app.use((req, res, next) => {
 app.get("/", (req, res) => {
     res.send("Estas en el Main");
 });
+
+/* Se uso para crear la tabla :P
+app.get('/createBD', async (request, response) => {
+    await productoSequelize.sync({ force: true });
+    console.log("Tabla creada");
+    response.send("Tabla creada");
+});
+*/
 
 const productosRoutes = require('./routes/producto.routes.js');
 app.use('/productos', productosRoutes);
