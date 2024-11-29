@@ -106,7 +106,7 @@ main {
 }
 
 .sidebar-links {
-    block-size: 80%;
+    block-size: 100%;
 }
 
 .sidebar-links ul,
@@ -123,7 +123,7 @@ main {
 
 .sidebar-links li a,
 .sidebar-bottom li a {
-    padding: 0.5rem;
+    padding: 2rem;
     font-size: 1.25rem;
     display: flex;
     align-items: center;
@@ -152,6 +152,7 @@ main {
     background-color: var(--primary-color-dark);
     transition: all 100ms ease-in;
     border-radius: 0.625rem;
+    padding: 1rem;
 }
 
 body.collapsed #sidebar {
