@@ -3,6 +3,11 @@ const router = express.Router();
 const productoSequelize = require('../entity/productoEntity.js');
 const { comprobarID } = require("../middleware/producto_middle.js")
 
+const cors = require("cors");
+router.use(cors());
+
+const upload = require('../storage/storage.js');
+
 router.get("/", (req, res) => {
     res.send("test: Estas en producto");
 });
@@ -15,10 +20,10 @@ router.delete("/delete/:id", comprobarID, async (req, res) => {
     res.send('Producto "eliminado"!');
 });
 
-router.post("/insert", async (req, res) => {
+router.post("/insert", upload.single("image"), async (req, res) => {
     const nombre = req.body.nombre;
     const precio = req.body.precio;
-    const imagen = req.body.imagen;
+    const imagen = request.file.filename;
     const tipo = req.body.tipo;
     try {
         const resultado = await productoSequelize.create({
@@ -28,6 +33,25 @@ router.post("/insert", async (req, res) => {
             tipo: tipo
         });
         res.status(200).send("Producto cargado!");
+    } catch (error) {
+        res.status(404).send(`ERROR: ${error}`);
+    }
+});
+
+router.put("/update/:id", comprobarID, async (req, res) => {
+    const nombre = req.body.nombre;
+    const precio = req.body.precio;
+    const tipo = req.body.tipo;
+    try {
+        const resultado = await productoSequelize.update(
+            {
+                nombre: nombre,
+                precio: precio,
+                tipo: tipo
+            },
+            { where: { id: req.params.id } }
+        );
+        res.status(200).send("Producto actualizado!");
     } catch (error) {
         res.status(404).send(`ERROR: ${error}`);
     }
