@@ -40,7 +40,7 @@ app.get('/createBD', async (request, response) => {
 */
 
 const productosRoutes = require('./routes/producto.routes.js');
-app.use('/productos', productosRoutes);
+app.use('/producto', productosRoutes);
 
 app.listen(process.env.PORT, () => {
     console.log(`Server is running on port ${process.env.PORT}`);

@@ -20,10 +20,17 @@ router.delete("/delete/:id", comprobarID, async (req, res) => {
     res.send('Producto "eliminado"!');
 });
 
+router.delete("/borrar/:id", comprobarID, async (req, res) => {
+    const resultado = productoSequelize.destroy(
+        { where: { id: req.params.id } }
+    );
+    res.send('Producto "eliminado"!');
+});
+
 router.post("/insert", upload.single("image"), async (req, res) => {
     const nombre = req.body.nombre;
     const precio = req.body.precio;
-    const imagen = request.file.filename;
+    const imagen = req.file.filename;
     const tipo = req.body.tipo;
     try {
         const resultado = await productoSequelize.create({
@@ -51,6 +58,7 @@ router.put("/update/:id", comprobarID, async (req, res) => {
             },
             { where: { id: req.params.id } }
         );
+        console.log(resultado);
         res.status(200).send("Producto actualizado!");
     } catch (error) {
         res.status(404).send(`ERROR: ${error}`);
@@ -62,9 +70,15 @@ router.get('/:id', comprobarID, async (request, response) => {
     response.status(200).send(resultado);
 });
 
-router.get("/list", async (req, res) => {
-    const resultado = await productoSequelize.findAll({ where: { eliminado: false } });
-    res.status(200).send(resultado);
+router.get("/list", async (request, response) => {
+    console.log("Listar productos");
+    try {
+        const lista_productos = await productoSequelize.findAll();
+        response.status(501).render("productos", { productos: lista_productos });
+    } catch (error) {
+        console.error("Error al listar productos:", error);
+        response.status(500).send("Error al listar productos");
+    }
 });
 
 module.exports = router;
