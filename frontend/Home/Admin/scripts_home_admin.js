@@ -122,42 +122,51 @@ document.addEventListener("DOMContentLoaded", () => {
     function createNewProductForm() {
         const formContainer = document.getElementById('nuevo-producto-form');
         formContainer.innerHTML = `
-            <form id="newProductForm" class="d-flex">
-                <div class="flex-grow-1">
-                    <div class="mb-3">
-                        <label for="productName" class="form-label">Nombre del Producto</label>
-                        <input type="text" class="form-control" id="productName" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="productPrice" class="form-label">Precio</label>
-                        <input type="number" class="form-control" id="productPrice" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="productType" class="form-label">Tipo</label>
-                        <select class="form-control" id="productType" required>
-                            <option value="consola">Consola</option>
-                            <option value="videojuego">Videojuego</option>
-                        </select>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Agregar Producto</button>
+            <div class="card mx-auto" style="max-width: 800px;">
+                <div class="card-body">
+                    <h5 class="card-title">Nuevo Producto</h5>
+                    <form id="newProductForm" class="d-flex flex-column">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="productName" class="form-label">Nombre del Producto</label>
+                                    <input type="text" class="form-control" id="productName" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="productPrice" class="form-label">Precio</label>
+                                    <input type="number" class="form-control" id="productPrice" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="productType" class="form-label">Tipo</label>
+                                    <select class="form-control" id="productType" required>
+                                        <option value="consola">Consola</option>
+                                        <option value="videojuego">Videojuego</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="productImage" class="form-label">Imagen (URL)</label>
+                                    <input type="url" class="form-control" id="productImage" required>
+                                </div>
+                                <img id="imagePreview" src="" alt="Vista previa de la imagen" class="img-thumbnail mb-3" style="display: none; width: 100%; height: 300px; object-fit: cover;">
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-center">
+                            <button type="submit" class="btn btn-primary">Agregar Producto</button>
+                        </div>
+                    </form>
                 </div>
-                <div class="ms-5">
-                    <div class="mb-3">
-                        <label for="productImage" class="form-label">Imagen (URL)</label>
-                        <input type="url" class="form-control" id="productImage" required>
-                    </div>
-                    <img id="imagePreview" src="" alt="Vista previa de la imagen" class="img-thumbnail" style="display: none; max-width: 200px;">
-                </div>
-            </form>
+            </div>
         `;
 
         const productImageInput = document.getElementById('productImage');
         const imagePreview = document.getElementById('imagePreview');
-
+        
         productImageInput.addEventListener('input', () => {
-            const imageUrl = productImageInput.value;
-            if (imageUrl) {
-                imagePreview.src = imageUrl;
+            const url = productImageInput.value;
+            if (url) {
+                imagePreview.src = url;
                 imagePreview.style.display = 'block';
             } else {
                 imagePreview.style.display = 'none';
