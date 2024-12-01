@@ -18,27 +18,16 @@ document.getElementById('loginForm').addEventListener('submit', (event) => {
                 <p>Usuario o contraseña incorrectos</p>
                 <img src="https://media.tenor.com/8TsyGKoXGVIAAAAM/spongebob-squarepants-spongebob.gif" alt="nyan cat" style="width:100%; max-width:200px; margin-top: 10px;" />
             `,
-            background: '#2b2b2b', 
-            confirmButtonColor: '#d33',
-            confirmButtonText: '<span>OK</span>',
-            showClass: {
-                popup: 'animate__animated animate__fadeInDown'
-            },
-            hideClass: {
-                popup: 'animate__animated animate__fadeOutUp'
-            },
+            background: '#2b2b2b',
+            confirmButtonColor: '#d33ffff',
+            confirmButtonText: '<span>Reintentar</span>',
             customClass: {
                 popup: 'swal2-popup-retro',
                 icon: 'swal2-icon-retro',
                 confirmButton: 'swal2-confirm-retro'
             },
-            height: '100%'
+            heightAuto: false, // Desactiva la altura automática, ESTE ERA EL MALDITO PROBLEMA!!!! MALDITO SWEATALERT!!!!
         });
-        /*Swal.fire({
-            icon: "error",
-            title: "Error de autenticación",
-            text: "Usuario o contraseña incorrectos",
-        });*/
     }
 });
 

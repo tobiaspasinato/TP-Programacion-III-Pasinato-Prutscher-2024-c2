@@ -1,5 +1,5 @@
 document.getElementById('back-button').addEventListener('click', function() {
-	window.location.href = '../home.html';
+	window.location.href = '../../';
 });
 
 document.getElementById('print-button').addEventListener('click', function() {
