@@ -33,23 +33,33 @@ router.patch("/update/:id", async (req, res) => {
     }
 });
 
-router.get("/listar", async (req, res) => {
+router.patch("/actu/:id", async (req, res) => {
+    const resultado = await productoSequelize.update(
+        { eliminado: false },
+        { where: { id: req.params.id } }
+    );
+    res.send('Producto "eliminado"!');
+});
+
+router.get("/list", async (req, res) => {
     try {
         const resultado = await productoSequelize.findAll();
         res.render("producto", { productos: resultado });
     } catch (error) {
         res.status(404).send(`ERROR: ${error}`);
     }
-    const resultado = await productoSequelize.findAll();
-    res.render("producto", { productos: resultado });
 });
 
 router.delete("/delete/:id", async (req, res) => {
-    const resultado = productoSequelize.update(
-        { eliminado: true },
-        { where: { id: req.params.id } }
-    );
-    res.send('Producto "eliminado"!');
+    try {
+        const resultado = await productoSequelize.update(
+            { eliminado: true },
+            { where: { id: req.params.id } }
+        );
+        res.send('Producto "eliminado"!');
+    } catch (error) {
+        res.status(404).send(`ERROR: ${error}`);
+    }
 });
 
 router.delete("/borrar/:id", async (req, res) => {
