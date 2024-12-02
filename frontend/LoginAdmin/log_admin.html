@@ -12,7 +12,6 @@
     <body>
         <main>
             <section>
-                <input id="btnBack" type="submit" value="Back to Log In">
                 <h1>Timeless Pixel</h1>
                 <form id="loginForm" method="post">
                     <div class="username">
@@ -23,7 +22,11 @@
                         <label>Contraseña</label>
                         <input id="inputContraAdmin" type="password" required>
                     </div>
-                    <input id="btnLoginAdmin" type="submit" value="Log In">
+                    <div class="botones">
+                        <button id="btnBack" class="inline-button" type="button">Back to Log In</button>
+                        <button id="btnQuickAccess" class="inline-button" type="button">Acceso rapido</button>
+                    </div>
+                    <button id="btnLoginAdmin" type="submit">Log In</button>
                 </form>
             </section>
             <aside>

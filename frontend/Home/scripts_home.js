@@ -140,6 +140,8 @@ document.addEventListener("DOMContentLoaded", () => {
   function agregarListenersBotonesAgregarCarrito() {
     const botonesAgregarCarrito = document.querySelectorAll('.add-to-cart-btn');
 
+    var notyf = new Notyf();
+
     botonesAgregarCarrito.forEach(boton => {
       boton.addEventListener('click', () => {
         const tarjeta = boton.closest('.card');
@@ -153,8 +155,8 @@ document.addEventListener("DOMContentLoaded", () => {
         } else {
           carrito.push({ name: nombreProducto, price: precioProducto, quantity: cantidad });
         }
-
-        alert('Producto agregado al carrito');
+        // Display a success notification
+        notyf.success('Producto agregado al carrito!');
       });
     });
   }
@@ -163,7 +165,15 @@ document.addEventListener("DOMContentLoaded", () => {
     productList.innerHTML = '';
 
     if (carrito.length === 0) {
-      productList.innerHTML = '<p>El carrito está vacío</p>';
+      productList.innerHTML = `
+        <div class="empty-cart-card">
+          <div class="card mb-4 shadow-sm">
+            <div class="card-body">
+              <h5 class="card-title">El carrito está vacío</h5>
+            </div>
+          </div>
+        </div>
+      `;
       return;
     }
 
@@ -230,8 +240,31 @@ document.addEventListener("DOMContentLoaded", () => {
   filtrarProductos('todos');
 
   pagarBtn.addEventListener("click", () => {
-    window.location.href="./Ticket/ticket.html"
+    if (carrito.length === 0) {
+      Swal.fire({
+        icon: 'error',
+        title: '<h4>Carrito vacio</h4>',
+        html: `
+            <p>No se encontraron items en el carrito</p>
+            <img src="https://media.tenor.com/0Yh4P81SBnkAAAAM/fresh-prince-room.gif" alt="empty" style="width:100%; max-width:200px; margin-top: 10px;" />
+        `,
+        background: '#2b2b2b',
+        confirmButtonColor: '#d33ffff',
+        confirmButtonText: '<span>Reintentar</span>',
+        customClass: {
+            popup: 'swal2-popup-retro',
+            icon: 'swal2-icon-retro',
+            confirmButton: 'swal2-confirm-retro'
+        },
+        heightAuto: false, // Desactiva la altura automática, ESTE ERA EL MALDITO PROBLEMA!!!! MALDITO SWEATALERT!!!!
+      });
+      //Swal.fire("El carrito está vacío. No puedes proceder al pago.");
+      return;
+    }
+    localStorage.setItem('carrito', JSON.stringify(carrito)); // Guarda el carrito en localStorage
+    window.location.href = "./Ticket/ticket.html";
   });
+
 
   function ocultarBotonesPaginacion() {
     if (prevPageBtn) prevPageBtn.style.display = 'none';

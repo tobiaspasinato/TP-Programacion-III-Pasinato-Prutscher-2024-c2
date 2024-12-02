@@ -83,6 +83,7 @@ table {
 	width: 100%;
 	border-collapse: collapse;
 	margin-bottom: 20px;
+	text-align-last: start;
 }
 
 thead th {
@@ -93,6 +94,7 @@ thead th {
 
 tbody td {
 	padding: 10px;
+	text-align-last: center;
 }
 
 img {
@@ -106,8 +108,9 @@ img {
 }
 
 #total-price {
-	font-size: 1.25em;
+	font-size: 1.5em;
 	text-align: right;
+	font-family: cursive;
 }
 
 /* Botón de volver */
@@ -138,11 +141,6 @@ img {
 .total-and-back div {
 	display: flex;
 	gap: 10px; /* Espaciado entre botones */
-}
-
-#total-price {
-	font-size: 1.25em;
-	text-align: right;
 }
 
 /* Botón de volver e imprimir */

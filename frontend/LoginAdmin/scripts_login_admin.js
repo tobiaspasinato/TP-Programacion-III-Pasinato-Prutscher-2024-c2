@@ -1,6 +1,10 @@
 document.getElementById('btnBack').addEventListener('click', () => {
     window.location.href = '../index.html'; // Redirige a la página de inicio
 });
+document.getElementById('btnQuickAccess').addEventListener('click', () => {
+    document.getElementById('inputNombreUsuarioAdmin').value = 'admin';
+    document.getElementById('inputContraAdmin').value = '123';
+});
 
 document.getElementById('loginForm').addEventListener('submit', (event) => {
     event.preventDefault(); // Evita que el formulario se envíe

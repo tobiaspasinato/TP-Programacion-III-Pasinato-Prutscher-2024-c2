@@ -59,6 +59,10 @@ main {
     flex-direction: column;
 }
 
+#derecha {
+    width: 100%;
+}	
+
 .sidebar-top {
     position: relative;
     display: flex;
@@ -131,6 +135,11 @@ main {
     text-decoration: none;
 }
 
+.sidebar-links li a:hover {
+    margin-bottom: 10px; /* Ajusta el valor según la separación deseada */
+    transition: margin 0.3s ease; /* Añade una transición suave */
+}
+
 .icon {
     display: flex;
     align-items: center;
@@ -153,6 +162,7 @@ main {
     transition: all 100ms ease-in;
     border-radius: 0.625rem;
     padding: 1rem;
+    margin: 1%;
 }
 
 body.collapsed #sidebar {
@@ -367,10 +377,22 @@ body.dark #paginacion button:hover {
     display: flex;
     justify-content: center;
     margin-top: 20px;
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
 }
 
 .d-none {
     display: none;
+}
+
+.empty-cart-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
 }
 
 /* Responsividad */

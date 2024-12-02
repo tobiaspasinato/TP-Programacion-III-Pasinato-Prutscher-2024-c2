@@ -252,3 +252,10 @@ button:focus {
     font-family: 'Sixtyfour Convergence', sans-serif;
     padding: 10px 20px;
 }
+
+
+.botones {
+    display: flex;
+    gap: 5%; 
+    padding-inline-end: 20px;
+}
