@@ -14,7 +14,7 @@ const path = require("path");
 
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, 'public')));
 
 //desabilita los cors
 app.use((req, res, next) => {
@@ -31,13 +31,11 @@ app.get("/", (req, res) => {
     res.send("Estas en el Main");
 });
 
-/* Se uso para crear la tabla :P
 app.get('/createBD', async (request, response) => {
     await productoSequelize.sync({ force: true });
     console.log("Tabla creada");
     response.send("Tabla creada");
 });
-*/
 
 const productosRoutes = require('./routes/producto.routes.js');
 app.use('/producto', productosRoutes);

@@ -85,6 +85,7 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
+    /*
     productosAMostrar.forEach(producto => {
       const tarjetaProducto = `
         <div class="col-md-4">
@@ -110,6 +111,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
     agregarListenersBotonesCantidad();
     agregarListenersBotonesAgregarCarrito();
+    */
+    async function cargarProductos() {
+      try {
+          const response = await fetch(`http://localhost:3000/producto/list`);
+          console.log(response);
+          const html = await response.text();
+          console.log(html);
+          productList.innerHTML = html;
+          agregarListenersBotonesCantidad();
+          agregarListenersBotonesAgregarCarrito();
+      } catch (error) {
+          console.error('Error al cargar los productos:', error);
+      }
+    }
+    cargarProductos();
   }
 
   function agregarListenersBotonesCantidad() {

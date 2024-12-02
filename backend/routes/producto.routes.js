@@ -12,7 +12,7 @@ router.get("/", (req, res) => {
     res.send("test: Estas en producto");
 });
 
-router.patch("/update/:id", async (req, res) => {
+router.put("/update/:id", async (req, res) => {
     const nombre = req.body.nombre;
     const precio = req.body.precio;
     const tipo = req.body.tipo;
@@ -26,20 +26,25 @@ router.patch("/update/:id", async (req, res) => {
             },
             { where: { id: req.params.id } }
         );
-        console.log(resultado);
         res.status(200).send("Producto actualizado!");
     } catch (error) {
         res.status(404).send(`ERROR: ${error}`);
     }
 });
 
-router.patch("/actu/:id", async (req, res) => {
-    const resultado = await productoSequelize.update(
-        { eliminado: false },
-        { where: { id: req.params.id } }
-    );
-    res.send('Producto "eliminado"!');
-});
+// router.put("/restore/:id", async (req, res) => {
+//     try {
+//         const resultado = await productoSequelize.update(
+//             {
+//                 eliminado: false,
+//             },
+//             { where: { id: req.params.id } }
+//         );
+//         res.status(200).send("Producto restaurado!");
+//     } catch (error) {
+//         res.status(404).send(`ERROR: ${error}`);
+//     }
+// });
 
 router.get("/list", async (req, res) => {
     try {
