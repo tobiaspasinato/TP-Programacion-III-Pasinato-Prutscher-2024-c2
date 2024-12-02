@@ -55,6 +55,28 @@ router.get("/list", async (req, res) => {
     }
 });
 
+router.get("/listconsola", async (req, res) => {
+    try {
+        const resultado = await productoSequelize.findAll({
+            where: { tipo: "consola" }
+        });
+        res.render("producto", { productos: resultado });
+    } catch (error) {
+        res.status(404).send(`ERROR: ${error}`);
+    }
+});
+
+router.get("/listjuego", async (req, res) => {
+    try {
+        const resultado = await productoSequelize.findAll({
+            where: { tipo: "Juego" }
+        });
+        res.render("producto", { productos: resultado });
+    } catch (error) {
+        res.status(404).send(`ERROR: ${error}`);
+    }
+});
+
 router.delete("/delete/:id", async (req, res) => {
     try {
         const resultado = await productoSequelize.update(
