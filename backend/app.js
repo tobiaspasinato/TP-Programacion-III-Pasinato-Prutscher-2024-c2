@@ -35,8 +35,8 @@ app.get("/", (req, res) => {
 
 app.get('/createBD', async (request, response) => {
     try {
-        //ventasSequelize.sync({ force: true });
-        //productoSequelize.sync({ force: true });
+        ventasSequelize.sync({ force: true });
+        productoSequelize.sync({ force: true });
         contraSequelize.sync({ force: true });
         console.log("Tabla creada");
         response.send("Tabla creada");
