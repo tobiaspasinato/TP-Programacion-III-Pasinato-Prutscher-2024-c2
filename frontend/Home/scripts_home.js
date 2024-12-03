@@ -114,7 +114,7 @@ document.addEventListener("DOMContentLoaded", () => {
     */
     async function cargarProductos() {
       try {
-          const response = await fetch(`http://localhost:3000/producto/list`);
+          const response = await fetch(`http://localhost:3000/productos/list`);
           console.log(response);
           const html = await response.text();
           console.log(html);
