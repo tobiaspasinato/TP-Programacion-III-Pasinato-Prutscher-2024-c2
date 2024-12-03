@@ -9,6 +9,7 @@ require("dotenv").config();
 
 const productoSequelize = require('./entity/productoEntity.js');
 const ventasSequelize = require('./entity/ventasEntity.js');
+const contraSequelize = require('./entity/contraEntity.js');
 
 const ejs = require("ejs");
 const path = require("path");
@@ -34,8 +35,9 @@ app.get("/", (req, res) => {
 
 app.get('/createBD', async (request, response) => {
     try {
-        ventasSequelize.sync({ force: true });
-        productoSequelize.sync({ force: true });
+        //ventasSequelize.sync({ force: true });
+        //productoSequelize.sync({ force: true });
+        contraSequelize.sync({ force: true });
         console.log("Tabla creada");
         response.send("Tabla creada");
     } catch (error) {
