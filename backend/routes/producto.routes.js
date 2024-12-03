@@ -32,19 +32,20 @@ router.put("/update/:id", async (req, res) => {
     }
 });
 
-// router.put("/restore/:id", async (req, res) => {
-//     try {
-//         const resultado = await productoSequelize.update(
-//             {
-//                 eliminado: false,
-//             },
-//             { where: { id: req.params.id } }
-//         );
-//         res.status(200).send("Producto restaurado!");
-//     } catch (error) {
-//         res.status(404).send(`ERROR: ${error}`);
-//     }
-// });
+router.patch("/restore/:id", async (req, res) => {
+    try {
+        const resultado = await productoSequelize.update(
+            {
+                eliminado: false,
+            },
+            { where: { id: req.params.id } }
+        );
+        res.status(200).send("Venta restaurada!");
+    } catch (error) {
+        res.status(404).send(`ERROR: ${error}`);
+    }
+});
+
 
 router.get("/list", async (req, res) => {
     try {

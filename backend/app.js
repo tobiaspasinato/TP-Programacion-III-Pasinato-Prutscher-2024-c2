@@ -8,6 +8,7 @@ require("dotenv").config();
 //console.log(process.env);
 
 const productoSequelize = require('./entity/productoEntity.js');
+const ventasSequelize = require('./entity/ventasEntity.js');
 
 const ejs = require("ejs");
 const path = require("path");
@@ -32,13 +33,22 @@ app.get("/", (req, res) => {
 });
 
 app.get('/createBD', async (request, response) => {
-    await productoSequelize.sync({ force: true });
-    console.log("Tabla creada");
-    response.send("Tabla creada");
+    try {
+        ventasSequelize.sync({ force: true });
+        productoSequelize.sync({ force: true });
+        console.log("Tabla creada");
+        response.send("Tabla creada");
+    } catch (error) {
+        console.error("Error al crear la tabla:", error);
+        response.status(500).send("Error al crear la tabla");
+    }
 });
 
 const productosRoutes = require('./routes/producto.routes.js');
-app.use('/producto', productosRoutes);
+app.use('/productos', productosRoutes);
+
+const ventasRoutes = require('./routes/ventas.routes.js');
+app.use('/ventas', ventasRoutes);
 
 app.listen(process.env.PORT, () => {
     console.log(`Server is running on port ${process.env.PORT}`);

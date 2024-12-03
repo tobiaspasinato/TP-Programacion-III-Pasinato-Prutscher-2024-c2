@@ -14,7 +14,7 @@ const ventasSequelize = sequelize.define(
             allowNull: false,
         },
         productos: {
-            type: DataTypes.ARRAY(DataTypes.JSON),
+            type: DataTypes.JSON,
             allowNull: false,
         },
         eliminado: {
