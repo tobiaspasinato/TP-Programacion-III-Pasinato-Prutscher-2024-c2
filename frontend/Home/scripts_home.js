@@ -168,33 +168,51 @@ class UI {
   async cargarProductos(categoria, limit, offset) {
     try {
         const queryString = categoria === 'todos' ? `limit=${limit}&offset=${offset}` : `categoria=${categoria}&limit=${limit}&offset=${offset}`;
+        console.log(`Fetching products with query: ${queryString}`); // Debugging line
         const response = await fetch(`http://localhost:3000/productos/list?${queryString}`);
         const html = await response.text();
+        console.log('Fetched HTML:', html); // Debugging line
+
+        // Check if the response contains products
+        if (html.trim() === '') {
+            console.log('No more products to load.');
+            return false; // Indicate that no products were loaded
+        }
+
         this.productList.innerHTML = html;
         this.agregarListenersBotonesCantidadGral();
         this.agregarListenersBotonesAgregarCarrito();
+        this.actualizarBotonesPaginacion(); // Actualiza la visibilidad de los botones de paginación
+        return true; // Indicate that products were loaded
     } catch (error) {
         console.error('Error al cargar los productos:', error);
+        return false; // Indicate that no products were loaded due to an error
     }
-  }
+}
 
+renderizarProductos() {
+  this.nextPageBtn.addEventListener('click', async () => {
+      const limit = this.itemsPorPagina;
+      const offset = this.paginaActual * limit;
+      console.log(`Next page clicked. Current page: ${this.paginaActual + 1}, Limit: ${limit}, Offset: ${offset}`); // Debugging line
 
+      const productsLoaded = await this.cargarProductos('todos', limit, offset);
+      if (productsLoaded) {
+          this.paginaActual++;
+          this.actualizarBotonesPaginacion(); // Actualiza la visibilidad de los botones de paginación
+      }
+  });
 
-
-  renderizarProductos() {
-    this.productList.innerHTML = '';
-
-    const inicio = (this.paginaActual - 1) * this.itemsPorPagina;
-    const fin = inicio + this.itemsPorPagina;
-    const productosAMostrar = this.productosFiltrados.slice(inicio, fin);
-
-    if (productosAMostrar.length === 0) {
-      this.productList.innerHTML = '<p>No se encontraron productos</p>';
-      return;
-    }
-
-    this.cargarProductos();
-  }
+    this.prevPageBtn.addEventListener('click', () => {
+        if (this.paginaActual > 1) {
+            this.paginaActual--;
+            const limit = this.itemsPorPagina;
+            const offset = (this.paginaActual - 1) * limit;
+            console.log(`Previous page clicked. Current page: ${this.paginaActual}, Limit: ${limit}, Offset: ${offset}`); // Debugging line
+            this.cargarProductos('todos', limit, offset);
+        }
+    });
+}
 
   agregarListenersBotonesAgregarCarrito() {
     const botonesAgregarCarrito = document.querySelectorAll('.add-to-cart-btn');
@@ -254,6 +272,31 @@ class UI {
 
     this.agregarListenersBotonesEliminarCarrito();
     this.agregarListenersBotonesCantidad();
+  }
+  // Oculta los botones de paginación
+  ocultarBotonesPaginacion() {
+    this.prevPageBtn.style.display = 'none';
+    this.nextPageBtn.style.display = 'none';
+  }
+
+  // Actualiza la visibilidad de los botones de paginación
+  actualizarBotonesPaginacion() {
+    const totalPages = Math.ceil(this.productosFiltrados.length / this.itemsPorPagina);
+
+    if (totalPages == 1) {
+        this.ocultarBotonesPaginacion();
+    } else {
+        if (this.paginaActual === 1) {
+            this.prevPageBtn.style.display = 'none';
+            this.nextPageBtn.style.display = 'block';
+        } else if (this.paginaActual === totalPages) {
+            this.prevPageBtn.style.display = 'block';
+            this.nextPageBtn.style.display = 'none';
+        } else {
+            this.prevPageBtn.style.display = 'block';
+            this.nextPageBtn.style.display = 'block';
+        }
+    }
   }
 
   agregarListenersBotonesEliminarCarrito() {
@@ -330,34 +373,6 @@ class UI {
     this.paginaActual = 1;
     this.renderizarProductos();
   }*/
-
-  // Oculta los botones de paginación
-  ocultarBotonesPaginacion() {
-    document.getElementById('prevPage').style.display = 'none';
-    document.getElementById('nextPage').style.display = 'none';
-}
-
-// Actualiza la visibilidad de los botones de paginación
-actualizarBotonesPaginacion() {
-    const prevPageBtn = document.getElementById('prevPage');
-    const nextPageBtn = document.getElementById('nextPage');
-    const totalPages = Math.ceil(this.productosFiltrados.length / this.itemsPorPagina);
-
-    if (totalPages == 1) {
-        ocultarBotonesPaginacion();
-    } else {
-        if (this.paginaActual === 1) {
-            prevPageBtn.style.display = 'none';
-            nextPageBtn.style.display = 'block';
-        } else if (this.paginaActual === totalPages) {
-            prevPageBtn.style.display = 'block';
-            nextPageBtn.style.display = 'none';
-        } else {
-            prevPageBtn.style.display = 'block';
-            nextPageBtn.style.display = 'block';
-        }
-    }
-  }
 }
 
 document.addEventListener("DOMContentLoaded", () => {

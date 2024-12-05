@@ -26,8 +26,8 @@ class GestorProductos {
 
     // Inicializa los event listeners y el filtro de productos por defecto
     init() {
-        this.initEventListeners();
         this.filtrarProductos('todos');
+        this.initEventListeners();
     }
 
     // Configura los event listeners para varios elementos de la interfaz de usuario
@@ -74,10 +74,6 @@ class GestorProductos {
                 this.paginaActual++;
                 this.renderizarProductos();
             }
-        });
-
-        document.getElementById("pagarBtn").addEventListener("click", () => {
-            window.location.href = "./Ticket/ticket.html";
         });
 
         document.querySelector('a[href="#nuevo"]').addEventListener('click', (event) => {
@@ -188,7 +184,7 @@ class GestorProductos {
                             </div>
                         </div>
                         <div class="d-flex justify-content-center">
-                            <button type="submit" class="btn btn-primary" id="botonCarga">Agregar Producto</button>
+                            <button type="submit" class="btn btn-primary">Agregar Producto</button>
                         </div>
                     </form>
                 </div>
@@ -206,12 +202,7 @@ class GestorProductos {
             } else {
                 imagePreview.style.display = 'none';
             }
-        });
-
-        document.getElementById('newProductForm').addEventListener('submit', (event) => {
-            event.preventDefault();
-            this.cargarDatos();
-        });
+        });        
     }
 
     // Crea el formulario para editar un producto existente
@@ -291,31 +282,35 @@ class GestorProductos {
         }
     }
 
-    cargarDatos() {
-        const insertar = document.getElementById("botonCarga");
-        console.log("tomar id");
-            insertar.addEventListener("click", async (event) => {
-                event.preventDefault();
-                const nombre = document.getElementById("nombre");
-                const precio = document.getElementById("precio");
-                const tipo = document.getElementById("tipo");
-                const imagen = document.getElementById("imagen").files[0];
-                console.log("tomo los elementos");
-                const datos = new FormData();
-                datos.append("nombre", nombre.value);
-                datos.append("precio", precio.value);
-                datos.append("tipo", tipo.value);
-                datos.append("image", imagen);
-                console.log("hizo el objeto");
+    static async cargarDatos(event) {
+        // Prevenir el comportamiento predeterminado del formulario
+        event.preventDefault();
+        try {
+            const nombre = document.getElementById("nombre").value;
+            const precio = document.getElementById("precio").value;
+            const tipo = document.getElementById("tipo").value;
+            const imagen = document.getElementById("imagen").files[0];
     
-                const pedido = await fetch("http://localhost:3000/productos/insert", {
-                    method: "POST",
-                    body: datos,
-                });
-                const respuesta = await pedido.json();
-                console.log(respuesta);
+            if (!imagen) throw new Error("Debe seleccionar una imagen.");
+    
+            const datos = new FormData();
+            datos.append("nombre", nombre);
+            datos.append("precio", precio);
+            datos.append("tipo", tipo);
+            datos.append("image", imagen);
+    
+            const response = await fetch("http://localhost:3000/productos/insert", {
+                method: "POST",
+                body: datos,
             });
-    }
+    
+            const result = await response.json();
+            console.log("Producto cargado:", result);
+        } catch (error) {
+            console.error("Error al cargar el producto:", error.message);
+        }
+    }    
+    
 
     // Agrega un nuevo producto a la lista
     agregarNuevoProducto() {
