@@ -160,35 +160,35 @@ class GestorProductos {
             <div class="card mx-auto" style="max-width: 800px;">
                 <div class="card-body">
                     <h5 class="card-title">Nuevo Producto</h5>
-                    <form id="newProductForm" class="d-flex flex-column">
+                    <form id="newProductForm" class="d-flex flex-column" enctype="multipart/form-data">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="productName" class="form-label">Nombre del Producto</label>
-                                    <input type="text" class="form-control" id="productName" required>
+                                    <input type="text" class="form-control" name="nombre" id="nombre" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="productPrice" class="form-label">Precio</label>
-                                    <input type="number" class="form-control" id="productPrice" required>
+                                    <input type="number" class="form-control" name="precio" id="precio" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="productType" class="form-label">Tipo</label>
+                                    <label for="productType" class="form-label" name="tipo" id="tipo">Tipo</label>
                                     <select class="form-control" id="productType" required>
-                                        <option value="consola">Consola</option>
-                                        <option value="videojuego">Videojuego</option>
+                                        <option value="Consola">Consola</option>
+                                        <option value="Juego">Juego</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label for="productImage" class="form-label">Imagen (URL)</label>
-                                    <input type="file" class="form-control" id="productImage" required>
+                                    <label for="productImage" class="form-label">Imagen</label>
+                                    <input type="file" class="form-control" name="imagen" id="imagen" required>
                                 </div>
                                 <img id="imagePreview" src="" alt="Vista previa de la imagen" class="img-thumbnail mb-3" style="display: none; width: 100%; height: 300px; object-fit: cover;">
                             </div>
                         </div>
                         <div class="d-flex justify-content-center">
-                            <button type="submit" class="btn btn-primary">Agregar Producto</button>
+                            <button type="submit" class="btn btn-primary" id="botonCarga">Agregar Producto</button>
                         </div>
                     </form>
                 </div>
@@ -210,7 +210,7 @@ class GestorProductos {
 
         document.getElementById('newProductForm').addEventListener('submit', (event) => {
             event.preventDefault();
-            this.agregarNuevoProducto();
+            this.cargarDatos();
         });
     }
 
@@ -291,6 +291,32 @@ class GestorProductos {
         }
     }
 
+    cargarDatos() {
+        const insertar = document.getElementById("botonCarga");
+        console.log("tomar id");
+            insertar.addEventListener("click", async (event) => {
+                event.preventDefault();
+                const nombre = document.getElementById("nombre");
+                const precio = document.getElementById("precio");
+                const tipo = document.getElementById("tipo");
+                const imagen = document.getElementById("imagen").files[0];
+                console.log("tomo los elementos");
+                const datos = new FormData();
+                datos.append("nombre", nombre.value);
+                datos.append("precio", precio.value);
+                datos.append("tipo", tipo.value);
+                datos.append("image", imagen);
+                console.log("hizo el objeto");
+    
+                const pedido = await fetch("http://localhost:3000/productos/insert", {
+                    method: "POST",
+                    body: datos,
+                });
+                const respuesta = await pedido.json();
+                console.log(respuesta);
+            });
+    }
+
     // Agrega un nuevo producto a la lista
     agregarNuevoProducto() {
         const nombre = document.getElementById('productName').value;
@@ -302,7 +328,7 @@ class GestorProductos {
         this.productos.push(nuevoProducto);
         this.filtrarProductos('todos');
     }
-
+    
     // Edita un producto existente
     editarProducto(index) {
         const producto = this.productos[index];
