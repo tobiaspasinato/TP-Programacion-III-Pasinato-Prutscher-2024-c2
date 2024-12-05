@@ -12,7 +12,7 @@ router.get("/", (req, res) => {
     res.send("test: Estas en producto");
 });
 
-router.put("/update/:id", async (req, res) => {
+router.put("/update/:id", validarTipo, async (req, res) => {
     const nombre = req.body.nombre;
     const precio = req.body.precio;
     const tipo = req.body.tipo;
@@ -97,7 +97,7 @@ router.delete("/borrar/:id", async (req, res) => {
     res.send('Producto "eliminado"!');
 });
 
-router.post("/insert", upload.single("image"), async (req, res) => {
+router.post("/insert", upload.single("image"), validarTipo, async (req, res) => {
     const nombre = req.body.nombre;
     const precio = req.body.precio;
     const imagen = req.file.filename;
