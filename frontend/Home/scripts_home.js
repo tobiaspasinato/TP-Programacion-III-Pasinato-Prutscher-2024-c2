@@ -197,13 +197,14 @@ document.addEventListener("DOMContentLoaded", () => {
       const tarjetaProducto = `
         <div class="col-md-4">
           <div class="card mb-4 shadow-sm">
-            <img src="${producto.img}" class="card-img-top" alt="${producto.name}">
             <div class="card-body">
               <h5 class="card-title">${producto.name}</h5>
               <p class="card-text">$${producto.price}</p>
               <p class="card-text">Cantidad: ${producto.quantity}</p>
               <p class="card-text">Total: $${producto.price * producto.quantity}</p>
               <button class="btn btn-sm btn-danger remove-from-cart-btn">Eliminar</button>
+              <button class="btn btn-sm btn-secondary decrement-quantity-btn">-</button>
+              <button class="btn btn-sm btn-secondary increment-quantity-btn">+</button>
             </div>
           </div>
         </div>
@@ -212,6 +213,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     agregarListenersBotonesEliminarCarrito();
+    agregarListenersBotonesCantidad();
   }
 
   function agregarListenersBotonesEliminarCarrito() {
@@ -223,6 +225,43 @@ document.addEventListener("DOMContentLoaded", () => {
         const nombreProducto = tarjeta.querySelector('.card-title').textContent;
 
         carrito = carrito.filter(item => item.name !== nombreProducto);
+
+        renderizarCarrito();
+      });
+    });
+  }
+
+  function agregarListenersBotonesCantidad() {
+    const botonesIncrementar = document.querySelectorAll('.increment-quantity-btn');
+    const botonesDecrementar = document.querySelectorAll('.decrement-quantity-btn');
+
+    botonesIncrementar.forEach(boton => {
+      boton.addEventListener('click', () => {
+        const tarjeta = boton.closest('.card');
+        const nombreProducto = tarjeta.querySelector('.card-title').textContent;
+
+        carrito = carrito.map(item => {
+          if (item.name === nombreProducto) {
+            item.quantity += 1;
+          }
+          return item;
+        });
+
+        renderizarCarrito();
+      });
+    });
+
+    botonesDecrementar.forEach(boton => {
+      boton.addEventListener('click', () => {
+        const tarjeta = boton.closest('.card');
+        const nombreProducto = tarjeta.querySelector('.card-title').textContent;
+
+        carrito = carrito.map(item => {
+          if (item.name === nombreProducto && item.quantity > 1) {
+            item.quantity -= 1;
+          }
+          return item;
+        });
 
         renderizarCarrito();
       });
