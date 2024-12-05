@@ -182,7 +182,7 @@ class GestorProductos {
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="productImage" class="form-label">Imagen (URL)</label>
-                                    <input type="url" class="form-control" id="productImage" required>
+                                    <input type="file" class="form-control" id="productImage" required>
                                 </div>
                                 <img id="imagePreview" src="" alt="Vista previa de la imagen" class="img-thumbnail mb-3" style="display: none; width: 100%; height: 300px; object-fit: cover;">
                             </div>

@@ -11,8 +11,8 @@ const productoSequelize = require('./entity/productoEntity.js');
 const ventasSequelize = require('./entity/ventasEntity.js');
 const contraSequelize = require('./entity/contraEntity.js');
 const sequelize = require('./database/sequelize.js');
-const relacionarEntidades = require('./entity/relaciones.js');
-relacionarEntidades();
+//const relacionarEntidades = require('./entity/relaciones.js');
+//relacionarEntidades();
 
 const ejs = require("ejs");
 const path = require("path");

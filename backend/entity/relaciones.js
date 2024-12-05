@@ -1,4 +1,4 @@
-const productoSequelize = require('../entity/productoEntity.js');
+/*const productoSequelize = require('../entity/productoEntity.js');
 const ventasSequelize = require('../entity/ventasEntity.js');
 
 function relacionarEntidades(){
@@ -6,4 +6,4 @@ function relacionarEntidades(){
     ventasSequelize.hasMany(productoSequelize); // Una venta tiene muchos productos
 }
 
-module.exports = relacionarEntidades;
+module.exports = relacionarEntidades;*/
