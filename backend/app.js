@@ -38,9 +38,10 @@ app.get("/", (req, res) => {
 
 app.get('/createBD', async (request, response) => {
     try {
-        await sequelize.query('SET FOREIGN_KEY_CHECKS = 0'); // Deshabilitar las verificaciones de claves foráneas
-        await sequelize.sync({ force: true });
-        await sequelize.query('SET FOREIGN_KEY_CHECKS = 1'); // Habilitar las verificaciones de claves foráneas
+        // await sequelize.query('SET FOREIGN_KEY_CHECKS = 0'); // Deshabilitar las verificaciones de claves foráneas
+        // await sequelize.sync({ force: true });
+        // await sequelize.query('SET FOREIGN_KEY_CHECKS = 1'); // Habilitar las verificaciones de claves foráneas
+        await productoSequelize.sync({ force: true });
         console.log("Tablas creadas");
         response.send("Tablas creadas");
     } catch (error) {
