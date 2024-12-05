@@ -4,7 +4,7 @@
             <img src="http://localhost:<%= process.env.PORT %>/img/<%= producto.imagen%>" class="card-img-top" alt="<%= producto.nombre%>">
             <div class="card-body">
                 <h5 class="card-title"><%= producto.nombre%></h5>
-                <p class="card-text"><%= producto.precio%></p>
+                <p class="card-text">$<%= producto.precio%></p>
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
                         <button class="btn btn-sm btn-outline-danger decrement-btn">-</button>
