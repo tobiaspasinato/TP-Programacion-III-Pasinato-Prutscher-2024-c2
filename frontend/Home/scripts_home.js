@@ -89,7 +89,7 @@ class UI {
           this.renderizarCarrito();
         } else {
           this.pagarContainer.classList.add('d-none');
-          this.mostrarBotonesPaginacion();
+          //this.mostrarBotonesPaginacion();
         }
       });
     });
@@ -158,17 +158,28 @@ class UI {
     this.filtrarProductos('todos');
   }
 
-  async cargarProductos() {
+  filtrarProductos(categoria) {
+    this.paginaActual = 1;
+    const limit = this.itemsPorPagina;
+    const offset = (this.paginaActual - 1) * this.itemsPorPagina;
+    this.cargarProductos(categoria, limit, offset);
+  }
+
+  async cargarProductos(categoria, limit, offset) {
     try {
-      const response = await fetch(`http://localhost:3000/productos/list`);
-      const html = await response.text();
-      this.productList.innerHTML = html;
-      this.agregarListenersBotonesCantidadGral();
-      this.agregarListenersBotonesAgregarCarrito();
+        const queryString = categoria === 'todos' ? `limit=${limit}&offset=${offset}` : `categoria=${categoria}&limit=${limit}&offset=${offset}`;
+        const response = await fetch(`http://localhost:3000/productos/list?${queryString}`);
+        const html = await response.text();
+        this.productList.innerHTML = html;
+        this.agregarListenersBotonesCantidadGral();
+        this.agregarListenersBotonesAgregarCarrito();
     } catch (error) {
-      console.error('Error al cargar los productos:', error);
+        console.error('Error al cargar los productos:', error);
     }
   }
+
+
+
 
   renderizarProductos() {
     this.productList.innerHTML = '';
@@ -205,6 +216,8 @@ class UI {
   }
 
   renderizarCarrito() {
+    console.log('Renderizando el carrito');
+
     this.productList.innerHTML = '';
 
     if (this.carrito.items.length === 0) {
@@ -308,7 +321,7 @@ class UI {
     });
   }
 
-  filtrarProductos(categoria) {
+  /*filtrarProductos(categoria) {
     if (categoria === 'todos') {
       this.productosFiltrados = this.productos;
     } else {
@@ -316,7 +329,7 @@ class UI {
     }
     this.paginaActual = 1;
     this.renderizarProductos();
-  }
+  }*/
 
   // Oculta los botones de paginación
   ocultarBotonesPaginacion() {

@@ -1,4 +1,4 @@
-const crypto = require('crypto');
+/*const crypto = require('crypto');
 
 const algorithm = 'aes-256-cbc';
 const key = crypto.randomBytes(32);
@@ -21,8 +21,8 @@ const desencriptar = (password) => {
 };
 
 module.exports = { encriptar, desencriptar };
-
-/*const crypto = require('crypto');
+*/
+const crypto = require('crypto');
 
 const algorithm = 'aes-256-cbc';
 const key = crypto.randomBytes(32);
@@ -46,4 +46,4 @@ const desencriptar = (passwordEncriptado, passwordOriginal) => {
     return Buffer.concat([decipher.update(valor), decipher.final()]).toString();
 };
 
-module.exports = { encriptar, desencriptar };*/
+module.exports = { encriptar, desencriptar };
