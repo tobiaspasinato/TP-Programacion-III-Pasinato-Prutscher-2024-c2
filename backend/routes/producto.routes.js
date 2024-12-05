@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const productoSequelize = require('../entity/productoEntity.js');
-const { comprobarID } = require("../middleware/producto_middle.js")
+const { comprobarID, validarTipo } = require("../middleware/producto_middle.js")
 
 const cors = require("cors");
 router.use(cors());

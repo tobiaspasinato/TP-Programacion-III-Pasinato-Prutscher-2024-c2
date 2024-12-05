@@ -10,6 +10,7 @@ require("dotenv").config();
 const productoSequelize = require('./entity/productoEntity.js');
 const ventasSequelize = require('./entity/ventasEntity.js');
 const contraSequelize = require('./entity/contraEntity.js');
+const sequelize = require('./database/sequelize.js');
 const relacionarEntidades = require('./entity/relaciones.js');
 relacionarEntidades();
 
@@ -37,14 +38,14 @@ app.get("/", (req, res) => {
 
 app.get('/createBD', async (request, response) => {
     try {
-        ventasSequelize.sync({ force: true });
-        productoSequelize.sync({ force: true });
-        contraSequelize.sync({ force: true });
-        console.log("Tabla creada");
-        response.send("Tabla creada");
+        await sequelize.query('SET FOREIGN_KEY_CHECKS = 0'); // Deshabilitar las verificaciones de claves foráneas
+        await sequelize.sync({ force: true });
+        await sequelize.query('SET FOREIGN_KEY_CHECKS = 1'); // Habilitar las verificaciones de claves foráneas
+        console.log("Tablas creadas");
+        response.send("Tablas creadas");
     } catch (error) {
-        console.error("Error al crear la tabla:", error);
-        response.status(500).send("Error al crear la tabla");
+        console.error("Error al crear las tablas:", error);
+        response.status(500).send("Error al crear las tablas");
     }
 });
 

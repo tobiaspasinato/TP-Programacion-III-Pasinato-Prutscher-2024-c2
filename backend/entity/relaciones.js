@@ -2,8 +2,8 @@ const productoSequelize = require('../entity/productoEntity.js');
 const ventasSequelize = require('../entity/ventasEntity.js');
 
 function relacionarEntidades(){
-    productoSequelize.belongsToMany(ventasSequelize, {through: 'ProductoVentas'});
-    ventasSequelize.belongsToMany(productoSequelize, {through: 'ProductoVentas'});
+    productoSequelize.belongsTo(ventasSequelize); // Un producto pertenece a una venta
+    ventasSequelize.hasMany(productoSequelize); // Una venta tiene muchos productos
 }
 
 module.exports = relacionarEntidades;

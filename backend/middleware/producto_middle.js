@@ -7,12 +7,16 @@ const comprobarID = function (req, res, next) {
     }
 };
 
-const otroMiddleware = function (req, res, next) {
-    // Lógica del otro middleware
-    next();
+const validarTipo = function (req, res, next) {
+    const tipo = req.body.tipo;
+    if (tipo === "Juego" || tipo === "Consola") {
+        next();
+    } else {
+        res.status(401).send("El tipo no es correcto");
+    }
 };
 
 module.exports = {
     comprobarID,
-    otroMiddleware
+    validarTipo
 };
