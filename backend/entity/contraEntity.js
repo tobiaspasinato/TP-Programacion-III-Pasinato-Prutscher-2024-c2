@@ -13,10 +13,6 @@ const contraSequelize = sequelize.define(
             type: DataTypes.STRING,
             allowNull: false,
         },
-        iv: {
-            type: DataTypes.STRING,
-            allowNull: false,
-        },
         encripted: {
             type: DataTypes.STRING,
             allowNull: false,

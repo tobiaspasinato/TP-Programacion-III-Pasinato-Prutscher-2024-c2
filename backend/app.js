@@ -10,6 +10,8 @@ require("dotenv").config();
 const productoSequelize = require('./entity/productoEntity.js');
 const ventasSequelize = require('./entity/ventasEntity.js');
 const contraSequelize = require('./entity/contraEntity.js');
+const relacionarEntidades = require('./entity/relaciones.js');
+relacionarEntidades();
 
 const ejs = require("ejs");
 const path = require("path");

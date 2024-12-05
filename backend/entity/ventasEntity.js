@@ -13,15 +13,6 @@ const ventasSequelize = sequelize.define(
             type: DataTypes.FLOAT,
             allowNull: false,
         },
-        productos: {
-            type: DataTypes.JSON,
-            allowNull: false,
-        },
-        eliminado: {
-            defaultValue: false,
-            type: DataTypes.BOOLEAN,
-            allowNull: false,
-        },
     },
     {
         timestamps: true,
