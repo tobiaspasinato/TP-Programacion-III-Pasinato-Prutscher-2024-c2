@@ -162,7 +162,7 @@ class GestorProductos {
     }
 
     // Crea el formulario para agregar un nuevo producto
-    crearFormularioNuevoProducto() {    }
+    crearFormularioNuevoProducto() {}
 
     // Crea el formulario para editar un producto existente
     editarProductoForm(producto) {
@@ -175,37 +175,7 @@ class GestorProductos {
             modal.parentNode.removeChild(modal);
         }
     }
-
-    static async cargarDatos(event) {
-        // Prevenir el comportamiento predeterminado del formulario
-        event.preventDefault();
-        try {
-            const nombre = document.getElementById("nombre").value;
-            const precio = document.getElementById("precio").value;
-            const tipo = document.getElementById("tipo").value;
-            const imagen = document.getElementById("imagen").files[0];
     
-            if (!imagen) throw new Error("Debe seleccionar una imagen.");
-    
-            const datos = new FormData();
-            datos.append("nombre", nombre);
-            datos.append("precio", precio);
-            datos.append("tipo", tipo);
-            datos.append("image", imagen);
-    
-            const response = await fetch("http://localhost:3000/productos/insert", {
-                method: "POST",
-                body: datos,
-            });
-    
-            const result = await response.json();
-            console.log("Producto cargado:", result);
-        } catch (error) {
-            console.error("Error al cargar el producto:", error.message);
-        }
-    }    
-    
-
     // Agrega un nuevo producto a la lista
     agregarNuevoProducto() {
         const nombre = document.getElementById('productName').value;
@@ -308,6 +278,32 @@ class GestorProductos {
         });
     }
 }
+
+async function cargarDatos() {
+    console.log("Cargando datos...");
+    const nombre = document.getElementById("nombre").value;
+    const precio = document.getElementById("precio").value;
+    const tipo = "Juego";
+    const imagen = document.getElementById("imagen").files[0];
+    console.log(nombre, precio, tipo, imagen);
+
+    const datos = new FormData();
+    datos.append("nombre", nombre);
+    datos.append("precio", precio);
+    datos.append("tipo", tipo);
+    datos.append("image", imagen);
+
+    console.log(datos);
+    const pedido = await fetch("http://localhost:3000/productos/insert", {
+        method: "POST",
+        body: datos,
+    });
+    console.log(pedido);
+    const respuesta = await pedido.json();
+    console.log(respuesta);
+};
+
+
 
 document.addEventListener("DOMContentLoaded", () => {
     window.gestorProductos = new GestorProductos();
