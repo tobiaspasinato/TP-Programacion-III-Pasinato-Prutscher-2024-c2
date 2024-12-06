@@ -317,7 +317,6 @@ async function activarDatos(id) {
 };
 
 async function modificarDatos(id) {
-    document.getElementById('edit-producto-form').style.display = 'block';
     const nombre = document.getElementById("nombre").value;
     const precio = document.getElementById("precio").value;
     const tipo = document.getElementById("tipo").value;
@@ -342,6 +341,22 @@ async function modificarDatos(id) {
 // Cierra el formulario de edición
 function cerrar() {
     document.getElementById('edit-producto-form').style.display = 'none';
+}
+
+function intermedio(id) {
+    console.log("hola");
+    document.getElementById('edit-producto-form').style.display = 'block';
+
+    const boton = document.getElementById("pBoton");
+
+    // Eliminar cualquier event listener existente
+    const nuevoBoton = boton.cloneNode(true);
+    boton.parentNode.replaceChild(nuevoBoton, boton);
+
+    nuevoBoton.addEventListener("click", function(event) {
+        event.preventDefault();
+        modificarDatos(id);
+    });
 }
 
 document.addEventListener("DOMContentLoaded", () => {
