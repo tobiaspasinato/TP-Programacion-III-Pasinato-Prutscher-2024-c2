@@ -158,7 +158,7 @@ class GestorProductos {
             this.crearFormularioNuevoProducto();
             return;
         }
-        if(categoria !== 'nuevo'){
+        else if(categoria !== 'nuevo'){
             document.getElementById('nuevo-producto-form').style.display = 'none';
         }
         this.productosFiltrados = categoria === 'todos' ? this.productos : this.productos.filter(producto => producto.categoria === categoria);
