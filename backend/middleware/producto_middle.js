@@ -9,8 +9,6 @@ const comprobarID = function (req, res, next) {
 
 const validarTipo = function (req, res, next) {
     let tipo = req.body.tipo;
-    tipo = tipo.toLowerCase();
-    console.log(tipo);
     if (tipo === "juego" || tipo === "consola") {
         next();
     } else {
