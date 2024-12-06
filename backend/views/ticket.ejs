@@ -1,13 +1,13 @@
 <header id="header">
-	<img src="/assets/Logo-Timeless-Pixel.webp" id="logo" alt="Timeless Pixel Logo">
+	<img src="/backend/public/img/Logo-Timeless-Pixel.webp" id="logo" alt="Timeless Pixel Logo">
 	<h1 id="titulo">Timeless Pixel</h1>
 </header>
 <aside>
 	<h1>Numero de orden: #<%= idVenta.id %></h1>
 	<h2>Nombre: <%= idVenta.nombre %></h2>
-	<p></p>
+	<p>Fecha: <%= idVenta.creado_en %></p>
 	<p>Estado: Pago</p>
-	<p></p>
+	<p>Metodo de pago: Mercado Pago</p>
 </aside>
 <main>
 	<table id="tabla">
@@ -26,8 +26,8 @@
 	<div class="total-and-back">
 		<p id="total-price"></p>
 		<div>
-			<button id="back-button">Volver</button>
-			<button id="print-button">Imprimir PDF</button>
+			<button id="back-button" onclick="window.location.href = '../Home.html'">Volver</button>
+			<button id="print-button" onclick="Ticket.printTicket()">Imprimir PDF</button>
 		</div>
 	</div>
 </main>
