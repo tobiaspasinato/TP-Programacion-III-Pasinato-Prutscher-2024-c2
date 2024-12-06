@@ -3,10 +3,12 @@ class Ticket {
         this.carrito = JSON.parse(localStorage.getItem('carrito'));
     }
 
-    init() {
-        this.cargarProductos();
-        this.renderCarrito();
-    }
+    async init() {
+        const cargado = await this.cargarProductos();
+        if (cargado) {
+            this.renderCarrito();
+        }
+    }      
 
     static printTicket() {
         const ticket = document.querySelector('#ticket-container');
@@ -57,7 +59,7 @@ class Ticket {
     }
 
     renderCarrito() {
-        const tablaBody = document.getElementById('tabla');
+        const tablaBody = document.getElementById('tbody');
         let totalPrecio = 0;
 
         this.carrito.forEach(item => {
