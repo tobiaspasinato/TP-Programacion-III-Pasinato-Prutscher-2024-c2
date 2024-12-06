@@ -297,17 +297,18 @@ async function cargarDatos() {
 };
 
 async function borrarDatos(id) {
+    console.log(id);
     const pedido = await fetch("http://localhost:3000/productos/delete/" + id, {
         method: "DELETE",
     });
-    const respuesta = await pedido.json();
+    console.log(pedido);
 };
 
 async function activarDatos(id) {
     const pedido = await fetch("http://localhost:3000/productos/restore/" + id, {
         method: "PATCH",
     });
-    const respuesta = await pedido.json();
+    console.log(pedido);
 };
 
 async function modificarDatos(id) {
@@ -315,17 +316,21 @@ async function modificarDatos(id) {
     const precio = document.getElementById("precio").value;
     const tipo = document.getElementById("tipo").value;
 
-    const datos = new FormData();
-    datos.append("nombre", nombre);
-    datos.append("precio", precio);
-    datos.append("tipo", tipo);
+    const datos = {
+        nombre: nombre,
+        precio: precio,
+        tipo: tipo,
+    };
 
     console.log(datos);
     const pedido = await fetch("http://localhost:3000/productos/update/" + id, {
-        method: "UPDATE",
-        body: datos,
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(datos),
     });
-    const respuesta = await pedido.json();
+    const respuesta = await manejarRespuesta(pedido);
 }
 
 async function cargarProductos(categoria, limit, offset) {
