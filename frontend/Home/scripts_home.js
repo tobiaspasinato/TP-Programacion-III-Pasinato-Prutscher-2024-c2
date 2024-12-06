@@ -152,7 +152,6 @@ class UI {
       console.log(this.carrito.items.total);
       const total = this.carrito.items.reduce((acc, item) => acc + item.total, 0);
       localStorage.setItem('Total', JSON.stringify(total));
-      alert(this.carrito.items.total);
       window.location.href = "./Ticket/ticket.html";
     });
 
