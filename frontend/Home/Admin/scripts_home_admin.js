@@ -9,19 +9,12 @@ class Producto {
 
 class GestorProductos {
     constructor() {
-        this.productos = [
-            new Producto('Playstation 1', 100, 'https://upload.wikimedia.org/wikipedia/commons/9/95/PSX-Console-wController.png', 'consolas'),
-            new Producto('Playstation 2', 150, 'https://w7.pngwing.com/pngs/98/809/png-transparent-playstation-2-playstation-3-super-nintendo-entertainment-system-video-game-consoles-playstation-2-game-electronics-gadget-thumbnail.png', 'consolas'),
-            new Producto('Playstation 3', 200, 'https://e7.pngegg.com/pngimages/948/199/png-clipart-playstation-3-playstation-2-playstation-4-video-game-consoles-sony-playstation-game-electronics.png', 'consolas'),
-            new Producto('Crash Bandicoot', 60, 'https://i.3djuegos.com/juegos/10692/crash_bandicoot/fotos/ficha/crash_bandicoot-2464077.jpg', 'videojuegos'),
-            new Producto('The Last of Us', 70, 'https://www.portalgames.com.ar/wp-content/uploads/2020/03/The_Last_of_US.jpg', 'videojuegos'),
-            new Producto('EA Sports FC 25', 150, 'https://www.clarin.com/2024/07/17/ORRRfEnDj_720x0__1.jpg', 'videojuegos'),
-            new Producto('Nintendo Switch', 300, 'https://http2.mlstatic.com/D_NQ_NP_845205-MLA70414548864_072023-O.webp', 'consolas')
-        ];
-
+        this.productos = [ ];
+        
         this.itemsPorPagina = 6;
         this.paginaActual = 1;
         this.productosFiltrados = this.productos;
+        this.productList = document.getElementById('product-list');
     }
 
     // Inicializa los event listeners y el filtro de productos por defecto
@@ -32,13 +25,13 @@ class GestorProductos {
 
     // Configura los event listeners para varios elementos de la interfaz de usuario
     initEventListeners() {
-        document.getElementById('modificar').addEventListener('click', function(event) {
-            event.preventDefault(); // Evita el comportamiento predeterminado del enlace
-            document.getElementById('edit-producto-form').style.display = 'block';
+        document.querySelectorAll('.btn-primary').forEach(button => {
+            button.addEventListener('click', (event) => {
+                event.preventDefault();
+                document.getElementById('edit-producto-form').style.display = 'block';
+            });
         });
 
-        const form = document.getElementById('nuevo-producto-form');
-        console.log(form);
         document.getElementById('nuevo-link').addEventListener('click', function(event) {
             event.preventDefault(); 
             document.getElementById('nuevo-producto-form').style.display = 'block';
@@ -161,18 +154,12 @@ class GestorProductos {
         else if(categoria !== 'nuevo'){
             document.getElementById('nuevo-producto-form').style.display = 'none';
         }
-        this.productosFiltrados = categoria === 'todos' ? this.productos : this.productos.filter(producto => producto.categoria === categoria);
         this.paginaActual = 1;
-        this.renderizarProductos();
+        const limit = this.itemsPorPagina;
+        const offset = (this.paginaActual - 1) * this.itemsPorPagina;
+        this.cargarProductos(categoria, limit, offset);
     }
 
-    // Crea el formulario para agregar un nuevo producto
-    crearFormularioNuevoProducto() {}
-
-    // Crea el formulario para editar un producto existente
-    editarProductoForm(producto) {
-    }
-    
     // Agrega un nuevo producto a la lista
     agregarNuevoProducto() {
         const nombre = document.getElementById('productName').value;
@@ -274,6 +261,24 @@ class GestorProductos {
             });
         });
     }
+    async cargarProductos(categoria, limit, offset) {
+        try {
+            const queryString = categoria === 'todos' ? `limit=${limit}&offset=${offset}` : `categoria=${categoria}&limit=${limit}&offset=${offset}`;
+            const response = await fetch(`http://localhost:3000/productos/listAdmin?${queryString}`);
+            const html = await response.text();
+    
+            if (html.trim() === '') {
+                return false; 
+            }
+    
+            this.productList.innerHTML = html;
+            this.actualizarBotonesPaginacion(); 
+            return true; 
+        } catch (error) {
+            console.error('Error al cargar los productos:', error);
+            return false; 
+        }
+    }
 }
 
 async function cargarDatos() {
@@ -312,6 +317,7 @@ async function activarDatos(id) {
 };
 
 async function modificarDatos(id) {
+    document.getElementById('edit-producto-form').style.display = 'block';
     const nombre = document.getElementById("nombre").value;
     const precio = document.getElementById("precio").value;
     const tipo = document.getElementById("tipo").value;
@@ -322,7 +328,7 @@ async function modificarDatos(id) {
         tipo: tipo,
     };
 
-    console.log(datos);
+    
     const pedido = await fetch("http://localhost:3000/productos/update/" + id, {
         method: "PUT",
         headers: {
@@ -333,26 +339,6 @@ async function modificarDatos(id) {
     const respuesta = await manejarRespuesta(pedido);
 }
 
-async function cargarProductos(categoria, limit, offset) {
-    try {
-        const queryString = categoria === 'todos' ? `limit=${limit}&offset=${offset}` : `categoria=${categoria}&limit=${limit}&offset=${offset}`;
-        const response = await fetch(`http://localhost:3000/productos/list?${queryString}`);
-        const html = await response.text();
-
-        if (html.trim() === '') {
-            return false; 
-        }
-
-        this.productList.innerHTML = html;
-        this.agregarListenersBotonesCantidadGral();
-        this.agregarListenersBotonesAgregarCarrito();
-        this.actualizarBotonesPaginacion(); 
-        return true; 
-    } catch (error) {
-        console.error('Error al cargar los productos:', error);
-        return false; 
-    }
-}
 // Cierra el formulario de edición
 function cerrar() {
     document.getElementById('edit-producto-form').style.display = 'none';

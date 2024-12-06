@@ -176,7 +176,7 @@ class UI {
         console.error('Error al cargar los productos:', error);
         return false; 
     }
-}
+  }
 
 renderizarProductos() {
   this.nextPageBtn.addEventListener('click', async () => {
