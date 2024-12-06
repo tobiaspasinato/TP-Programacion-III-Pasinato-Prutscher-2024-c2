@@ -334,6 +334,7 @@ async function borrarDatos(id) {
         method: "DELETE",
     });
     console.log(pedido);
+    window.location.reload();
 };
 
 async function activarDatos(id) {
@@ -341,6 +342,7 @@ async function activarDatos(id) {
         method: "PATCH",
     });
     console.log(pedido);
+    window.location.reload();
 };
 
 async function modificarDatos(id) {
@@ -390,6 +392,7 @@ function intermedio(id) {
         event.preventDefault();
         modificarDatos(id);
         cerrar()
+        window.location.reload();
     });
 }
 
