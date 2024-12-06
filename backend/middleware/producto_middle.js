@@ -8,8 +8,10 @@ const comprobarID = function (req, res, next) {
 };
 
 const validarTipo = function (req, res, next) {
-    const tipo = req.body.tipo;
-    if (tipo === "Juego" || tipo === "Consola") {
+    let tipo = req.body.tipo;
+    tipo = tipo.toLowerCase();
+    console.log(tipo);
+    if (tipo === "juego" || tipo === "consola") {
         next();
     } else {
         res.status(401).send("El tipo no es correcto");
