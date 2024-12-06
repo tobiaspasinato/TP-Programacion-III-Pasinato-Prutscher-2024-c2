@@ -190,6 +190,10 @@ class GestorProductos {
     
     // Edita un producto existente
     editarProducto(index) {
+        document.getElementById('nuevo-link').addEventListener('click', function(event) {
+            event.preventDefault(); // Evita el comportamiento predeterminado del enlace
+            document.getElementById('edit-producto-form').style.display = 'block';
+        });
         const producto = this.productos[index];
         this.editarProductoForm(producto);
     }
