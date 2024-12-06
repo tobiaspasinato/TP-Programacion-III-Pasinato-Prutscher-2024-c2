@@ -317,9 +317,9 @@ async function activarDatos(id) {
 };
 
 async function modificarDatos(id) {
-    const nombre = document.getElementById("nombre").value;
-    const precio = document.getElementById("precio").value;
-    const tipo = document.getElementById("tipo").value;
+    const nombre = document.getElementById("nombreMod").value;
+    const precio = document.getElementById("precioMod").value;
+    const tipo = document.getElementById("tipoMod").value;
 
     const datos = {
         nombre: nombre,
@@ -336,6 +336,12 @@ async function modificarDatos(id) {
         body: JSON.stringify(datos),
     });
     const respuesta = await manejarRespuesta(pedido);
+    if (respuesta.ok) {
+        gestorProductos.filtrarProductos('todos');
+        cerrar();
+    } else {
+        console.error('Error actualizando producto:', respuesta);
+    }
 }
 
 // Cierra el formulario de edición
@@ -356,6 +362,7 @@ function intermedio(id) {
     nuevoBoton.addEventListener("click", function(event) {
         event.preventDefault();
         modificarDatos(id);
+        cerrar()
     });
 }
 
