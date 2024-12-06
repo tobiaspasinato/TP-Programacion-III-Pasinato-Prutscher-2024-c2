@@ -46,27 +46,27 @@ router.patch("/restore/:id", async (req, res) => {
     }
 });
 
-router.get("/listconsola", async (req, res) => {
-    try {
-        const resultado = await productoSequelize.findAll({
-            where: { tipo: "consola" }
-        });
-        res.render("producto", { productos: resultado });
-    } catch (error) {
-        res.status(404).send(`ERROR: ${error}`);
-    }
-});
+// router.get("/listconsola", async (req, res) => {
+//     try {
+//         const resultado = await productoSequelize.findAll({
+//             where: { tipo: "consola" }
+//         });
+//         res.render("producto", { productos: resultado });
+//     } catch (error) {
+//         res.status(404).send(`ERROR: ${error}`);
+//     }
+// });
 
-router.get("/listjuego", async (req, res) => {
-    try {
-        const resultado = await productoSequelize.findAll({
-            where: { tipo: "Juego" }
-        });
-        res.render("producto", { productos: resultado });
-    } catch (error) {
-        res.status(404).send(`ERROR: ${error}`);
-    }
-});
+// router.get("/listjuego", async (req, res) => {
+//     try {
+//         const resultado = await productoSequelize.findAll({
+//             where: { tipo: "Juego" }
+//         });
+//         res.render("producto", { productos: resultado });
+//     } catch (error) {
+//         res.status(404).send(`ERROR: ${error}`);
+//     }
+// });
 
 router.get("/listAdmin", async (req, res) => {
     const categoria = req.query.categoria || null;
@@ -91,10 +91,13 @@ router.get("/list", async (req, res) => {
     const limit = parseInt(req.query.limit) || 6;
     const offset = parseInt(req.query.offset) || 0;
 
-    const whereClause = categoria && categoria !== 'todos' ? { tipo: categoria } : {};
+    const whereClause = {
+        eliminado: false,
+        ...(categoria && categoria !== 'todos' && { tipo: categoria })
+    };
     try {
         const resultado = await productoSequelize.findAll({
-            where: whereClause && { eliminado: false },
+            where: whereClause, 
             limit,
             offset
         });
