@@ -34,3 +34,9 @@ const iconMoon = document.createElement('span');
 iconMoon.classList.add('icon-moon');
 iconMoon.innerHTML = '&#9728;'; // Ícono de sol
 themeToggleBtn.appendChild(iconMoon);
+
+//guarda el nombre en el localstorage
+document.getElementById('btnLogin').addEventListener('click', () => {
+    const nombreUsuario = document.getElementById('inputNombreUsuario').value;
+    localStorage.setItem('nombreUsuario', nombreUsuario);
+});

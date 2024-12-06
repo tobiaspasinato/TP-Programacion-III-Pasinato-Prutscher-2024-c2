@@ -12,12 +12,14 @@ class Carrito {
     this.items = [];
   }
 
-  agregarProducto(producto, cantidad) {
+  agregarProducto(producto, cantidad, id) {
     const productoEnCarrito = this.items.find(item => item.name === producto.name);
     if (productoEnCarrito) {
       productoEnCarrito.quantity += cantidad;
+      productoEnCarrito.id = id;
+      productoEnCarrito.total = productoEnCarrito.quantity * producto.price;
     } else {
-      this.items.push({ ...producto, quantity: cantidad });
+      this.items.push({ ...producto, quantity: cantidad, id: id, total: producto.price * cantidad });
     }
   }
 
@@ -59,6 +61,9 @@ class UI {
   }
 
   init() {
+
+    document.getElementById('usuario').innerHTML = "Bienvenido "+ localStorage.getItem('nombreUsuario');
+
     this.expandBtn.addEventListener("click", () => {
       document.body.classList.toggle("collapsed");
     });
@@ -144,6 +149,10 @@ class UI {
         return;
       }
       localStorage.setItem('carrito', JSON.stringify(this.carrito.items));
+      console.log(this.carrito.items.total);
+      const total = this.carrito.items.reduce((acc, item) => acc + item.total, 0);
+      localStorage.setItem('Total', JSON.stringify(total));
+      alert(this.carrito.items.total);
       window.location.href = "./Ticket/ticket.html";
     });
 
@@ -212,9 +221,12 @@ renderizarProductos() {
         const nombreProducto = tarjeta.querySelector('.card-title').textContent;
         const precioProducto = parseFloat(tarjeta.querySelector('.card-text').textContent.replace('$', ''));
         const cantidad = parseInt(tarjeta.querySelector('.quantity').textContent);
+        const id = parseInt(tarjeta.querySelector('.card-id').textContent);
+        console.log(id);
 
         const producto = new Producto(nombreProducto, precioProducto, '', '');
-        this.carrito.agregarProducto(producto, cantidad);
+        this.carrito.agregarProducto(producto, cantidad, id);
+
         notyf.success('Producto agregado al carrito!');
       });
     });
