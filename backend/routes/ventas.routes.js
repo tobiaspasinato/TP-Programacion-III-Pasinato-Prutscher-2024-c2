@@ -2,30 +2,47 @@ const express = require('express');
 const router = express.Router();
 
 const ventasSequelize = require('../entity/ventasEntity.js');
+const ventaProductoEntity = require('../entity/ventaProductoEntity.js');
+const ProductoSequelize = require('../entity/productoEntity.js');
+
 
 router.get("/", (req, res) => {
     res.send("test: Estas en ventas");
 });
 
 router.get("/list", async (req, res) => {
+    let ventasJSON = [];
     try {
-        const resultado = await ventasSequelize.findAll();
-        res.status(200).send(resultado);
+        let ventas = await ventasSequelize.findAll({ include: ProductoSequelize });
+        const ventasJSON = ventas.map(venta => {
+            const jsonVenta = venta.toJSON();
+            return {
+                ...jsonVenta
+            }
+        });
+        res.status(200).send(ventasJSON);
     } catch (error) {
         res.status(404).send(`ERROR: ${error}`);
     }
 });
 
 router.post("/insert", async (req, res) => {
-    req.body.total = parseFloat(req.body.total);
-    req.body.productos = req.body.productos;
-    console.log(req.body.productos);
+    const total = parseFloat(req.body.total);
+    const nombre = req.body.nombre;
+    const productos = req.body.productos;
     try {
-        const resultado = await ventasSequelize.create({
+        const venta = await ventasSequelize.create({
             total: req.body.total,
-            productos: req.body.productos,
+            nombre: req.body.nombre,
         });
-        res.status(200).send(resultado);
+        productos.forEach(async (producto) => {
+            ventaProductoEntity.create({
+                VentaId: venta.id,
+                ProductoId: producto.id,
+                cantidad: producto.cantidad,
+            })
+        });
+        res.status(200).send(venta);
     } catch (error) {
         res.status(404).send(`ERROR: ${error}`);
     }

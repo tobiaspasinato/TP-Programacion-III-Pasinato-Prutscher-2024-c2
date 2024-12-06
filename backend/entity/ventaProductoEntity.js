@@ -1,20 +1,15 @@
 const sequelize = require("../database/sequelize.js");
 const { DataTypes } = require("sequelize");
 
-const ventasSequelize = sequelize.define(
-    "Ventas",
-    {
+const ventaProductoSequelize = sequelize.define(
+    "ventaProductos", {
         id: {
             type: DataTypes.INTEGER,
             autoIncrement: true,
             primaryKey: true,
         },
-        nombre: {
-            type: DataTypes.STRING,
-            allowNull: false,
-        },
-        total: {
-            type: DataTypes.FLOAT,
+        cantidad: {
+            type: DataTypes.INTEGER,
             allowNull: false,
         },
     },
@@ -24,4 +19,4 @@ const ventasSequelize = sequelize.define(
     }
 );
 
-module.exports = ventasSequelize;
+module.exports = ventaProductoSequelize;

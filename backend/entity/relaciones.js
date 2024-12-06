@@ -1,9 +1,10 @@
-/*const productoSequelize = require('../entity/productoEntity.js');
+const productoSequelize = require('../entity/productoEntity.js');
 const ventasSequelize = require('../entity/ventasEntity.js');
+const ventaProductosSequelize = require('../entity/ventaProductoEntity.js');
 
 function relacionarEntidades(){
-    productoSequelize.belongsTo(ventasSequelize); // Un producto pertenece a una venta
-    ventasSequelize.hasMany(productoSequelize); // Una venta tiene muchos productos
+    productoSequelize.belongsToMany(ventasSequelize, {through: ventaProductosSequelize});
+    ventasSequelize.belongsToMany(productoSequelize, {through: ventaProductosSequelize}); 
 }
 
-module.exports = relacionarEntidades;*/
+module.exports = relacionarEntidades;
