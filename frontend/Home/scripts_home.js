@@ -362,6 +362,34 @@ renderizarProductos() {
   }*/
 }
 
+async function cargarVentas() {
+  //editar para que tome el local storage
+  const nombre = "pepe";
+  const total = 100000;
+  const productos = [
+      {"id":1, "frita": "holi2", "cantidad": 3, "papa": "holi"},
+      {"id":2, "cantidad":4}
+  ];
+
+
+  const datos = {
+      nombre: nombre,
+      total: total,
+      productos: productos
+  };
+
+  const pedido = await fetch("http://localhost:3000/ventas/insert", {
+      method: "POST",
+      headers: {
+          "Content-Type": "application/json"
+      },
+      body: JSON.stringify(datos)
+  });
+
+  const respuesta = await pedido.json();
+  console.log(respuesta);
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   new UI();
 });
