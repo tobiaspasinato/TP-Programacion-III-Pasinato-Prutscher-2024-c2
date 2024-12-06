@@ -280,12 +280,10 @@ class GestorProductos {
 }
 
 async function cargarDatos() {
-    console.log("Cargando datos...");
     const nombre = document.getElementById("nombre").value;
     const precio = document.getElementById("precio").value;
-    const tipo = "Juego";
+    const tipo = document.getElementById("tipo").value;
     const imagen = document.getElementById("imagen").files[0];
-    console.log(nombre, precio, tipo, imagen);
 
     const datos = new FormData();
     datos.append("nombre", nombre);
@@ -293,17 +291,66 @@ async function cargarDatos() {
     datos.append("tipo", tipo);
     datos.append("image", imagen);
 
-    console.log(datos);
     const pedido = await fetch("http://localhost:3000/productos/insert", {
         method: "POST",
         body: datos,
     });
-    console.log(pedido);
+
     const respuesta = await pedido.json();
-    console.log(respuesta);
 };
 
+async function borrarDatos(id) {
+    const pedido = await fetch("http://localhost:3000/productos/delete/" + id, {
+        method: "DELETE",
+    });
+    const respuesta = await pedido.json();
+};
 
+async function activarDatos(id) {
+    const pedido = await fetch("http://localhost:3000/productos/restore/" + id, {
+        method: "PATCH",
+    });
+    const respuesta = await pedido.json();
+};
+
+async function modificarDatos(id) {
+    const nombre = document.getElementById("nombre").value;
+    const precio = document.getElementById("precio").value;
+    const tipo = document.getElementById("tipo").value;
+
+    const datos = new FormData();
+    datos.append("nombre", nombre);
+    datos.append("precio", precio);
+    datos.append("tipo", tipo);
+
+    console.log(datos);
+    const pedido = await fetch("http://localhost:3000/productos/update/" + id, {
+        method: "UPDATE",
+        body: datos,
+    });
+    const respuesta = await pedido.json();
+}
+
+async function cargarProductos(categoria, limit, offset) {
+    try {
+        const queryString = categoria === 'todos' ? `limit=${limit}&offset=${offset}` : `categoria=${categoria}&limit=${limit}&offset=${offset}`;
+        const response = await fetch(`http://localhost:3000/productos/list?${queryString}`);
+        const html = await response.text();
+
+        if (html.trim() === '') {
+            return false; 
+        }
+
+        this.productList.innerHTML = html;
+        this.agregarListenersBotonesCantidadGral();
+        this.agregarListenersBotonesAgregarCarrito();
+        this.actualizarBotonesPaginacion(); 
+        return true; 
+    } catch (error) {
+        console.error('Error al cargar los productos:', error);
+        return false; 
+    }
+}
 
 document.addEventListener("DOMContentLoaded", () => {
     window.gestorProductos = new GestorProductos();
