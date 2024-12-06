@@ -5,7 +5,11 @@
 			<div class="card-body">
 				<h5 class="card-title"><%= producto.nombre %></h5>
 				<p class="card-text"><%= producto.precio %></p>
-				<p class="card-text"><%= producto.eliminado %></p>
+				<% if (!producto.eliminado) { %>
+					<p class="card-text">En Stock</p>
+				<% } else { %>
+					<p class="card-text">Fuera de Stock</p>
+				<% } %>
 				<div class="d-flex justify-content-between align-items-center">
 					<button class="btn btn-sm btn-primary" onclick="intermedio(<%= producto.id %>)" id="modificar">Modificar</button>
 					<button class="btn btn-sm btn-danger" onclick="borrarDatos(<%= producto.id %>)">Eliminar</button>
