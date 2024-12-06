@@ -31,7 +31,7 @@
 			<div class="sidebar-links">
 				<ul>
 					<li>
-						<a href="#nuevo" title="Nuevo">
+						<a href="#nuevo" title="Nuevo" id="nuevo-link">
 							<div class="icon">
 								<img src="../../assets/new.png" title="nuevo producto Icon">
 							</div>
@@ -90,7 +90,89 @@
 			<!-------------- Productos----------------->
 			<div id="page-content-wrapper" class="container-fluid p-4">
 				<div class="row" id="product-list"></div>
-				<div id="nuevo-producto-form" class="container mt-4"></div>
+			</div>
+			<!-------------- Nuevo Producto----------------->
+			<div id="nuevo-producto-form" class="container mt-4">
+				<div class="card mx-auto" style="max-width: 800px;">
+					<div class="card-body">
+						<h5 class="card-title">Nuevo Producto</h5>
+						<form id="newProductForm" class="d-flex flex-column" enctype="multipart/form-data">
+							<div class="row">
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label for="productName" class="form-label">Nombre del Producto</label>
+										<input type="text" class="form-control" name="nombre" id="nombre" required>
+									</div>
+									<div class="mb-3">
+										<label for="productPrice" class="form-label">Precio</label>
+										<input type="number" class="form-control" name="precio" id="precio" required>
+									</div>
+									<div class="mb-3">
+										<label for="productType" class="form-label" name="tipo" id="tipo">Tipo</label>
+										<select class="form-control" id="productType" required>
+											<option value="Consola">Consola</option>
+											<option value="Juego">Juego</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label for="productImage" class="form-label">Imagen</label>
+										<input type="file" class="form-control" name="imagen" id="imagen" required>
+									</div>
+									<img id="imagePreview" src="" alt="Vista previa de la imagen" class="img-thumbnail mb-3" style="display: none; width: 100%; height: 300px; object-fit: cover;">
+								</div>
+							</div>
+							<div class="d-flex justify-content-center">
+								<button type="submit" class="btn btn-primary">Agregar Producto</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+			<!-------------- Editar Producto----------------->
+			<div class="modal fade show" id="edit-producto-form" tabindex="-1" role="dialog">
+				<div class="modal-dialog modal-lg" role="document">
+					<div class="modal-content bg-dark text-light">
+						<div class="modal-header">
+							<h5 class="modal-title">Modificar Producto</h5>
+							<button type="button" class="btn-close" aria-label="Close" onclick="gestorProductos.cerrarModal()" style="filter: invert(1);"></button>
+						</div>
+						<div class="modal-body">
+							<form id="editProductForm" class="d-flex flex-column">
+								<div class="row">
+									<div class="col-md-6">
+										<div class="mb-3">
+											<label for="editProductName" class="form-label">Nombre del Producto</label>
+											<input type="text" class="form-control bg-dark text-light" id="editProductName" value="${producto.nombre}" required>
+										</div>
+										<div class="mb-3">
+											<label for="editProductPrice" class="form-label">Precio</label>
+											<input type="number" class="form-control bg-dark text-light" id="editProductPrice" value="${producto.precio}" required>
+										</div>
+										<div class="mb-3">
+											<label for="editProductType" class="form-label">Tipo</label>
+											<select class="form-control bg-dark text-light" id="editProductType" required>
+												<option value="consola" ${producto.categoria === 'consolas' ? 'selected' : ''}>Consola</option>
+												<option value="videojuego" ${producto.categoria === 'videojuegos' ? 'selected' : ''}>Videojuego</option>
+											</select>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="mb-3">
+											<label for="editProductImage" class="form-label">Imagen (URL)</label>
+											<input type="url" class="form-control bg-dark text-light" id="editProductImage" value="${producto.imagen}" required>
+										</div>
+										<img id="editImagePreview" src="${producto.imagen}" alt="Vista previa de la imagen" class="img-thumbnail mb-3" style="display: block; width: 100%; height: 300px; object-fit: cover;">
+									</div>
+								</div>
+								<div class="d-flex justify-content-center">
+									<button type="submit" class="btn btn-primary">Guardar Cambios</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
 			</div>
 			<!-------------- Botón Pagar----------------->
 			<div id="pagar-container" class="d-none">
