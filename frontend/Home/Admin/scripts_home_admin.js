@@ -32,6 +32,11 @@ class GestorProductos {
 
     // Configura los event listeners para varios elementos de la interfaz de usuario
     initEventListeners() {
+        document.getElementById('modificar').addEventListener('click', function(event) {
+            event.preventDefault(); // Evita el comportamiento predeterminado del enlace
+            document.getElementById('edit-producto-form').style.display = 'block';
+        });
+
         const form = document.getElementById('nuevo-producto-form');
         console.log(form);
         document.getElementById('nuevo-link').addEventListener('click', function(event) {
@@ -132,7 +137,7 @@ class GestorProductos {
                             <h5 class="card-title">${producto.nombre}</h5>
                             <p class="card-text">$${producto.precio}</p>
                             <div class="d-flex justify-content-between align-items-center">
-                                <button class="btn btn-sm btn-primary" onclick="gestorProductos.editarProducto(${index})">Modificar</button>
+                                <button class="btn btn-sm btn-primary" onclick="gestorProductos.editarProducto(${index})" id="modificar">Modificar</button>
                                 <button class="btn btn-sm btn-danger" id="eliminarProducto${index}">Eliminar</button>
                             </div>
                         </div>
@@ -167,14 +172,6 @@ class GestorProductos {
     // Crea el formulario para editar un producto existente
     editarProductoForm(producto) {
     }
-
-    // Cierra el modal
-    cerrarModal() {
-        const modal = document.getElementById('productModal');
-        if (modal) {
-            modal.parentNode.removeChild(modal);
-        }
-    }
     
     // Agrega un nuevo producto a la lista
     agregarNuevoProducto() {
@@ -190,10 +187,6 @@ class GestorProductos {
     
     // Edita un producto existente
     editarProducto(index) {
-        document.getElementById('nuevo-link').addEventListener('click', function(event) {
-            event.preventDefault(); // Evita el comportamiento predeterminado del enlace
-            document.getElementById('edit-producto-form').style.display = 'block';
-        });
         const producto = this.productos[index];
         this.editarProductoForm(producto);
     }
@@ -354,6 +347,10 @@ async function cargarProductos(categoria, limit, offset) {
         console.error('Error al cargar los productos:', error);
         return false; 
     }
+}
+// Cierra el formulario de edición
+function cerrar() {
+    document.getElementById('edit-producto-form').style.display = 'none';
 }
 
 document.addEventListener("DOMContentLoaded", () => {
