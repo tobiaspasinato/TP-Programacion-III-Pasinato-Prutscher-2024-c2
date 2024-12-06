@@ -1,58 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<link rel="icon" href="/assets/favicon.png" type="image" />
-	<link rel="stylesheet" href="/styles_ticket.css" />
-	<link href="https://fonts.googleapis.com/css2?family=Mulish&display=swap" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css2?family=Sixtyfour+Convergence&display=swap" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css2?family=Sixtyfour+Convergence&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href="/fonts.css" />
-	<title>Timeless Pixel - ticket</title>
-	</head>
-	<body>
+<body>
 	<div id="ticket-container">
 		<header id="header">
-		<img src="/assets/Logo-Timeless-Pixel.webp" id="logo" alt="Timeless Pixel Logo">
-		<h1 id="titulo">Timeless Pixel</h1>
+			<img src="/assets/Logo-Timeless-Pixel.webp" id="logo" alt="Timeless Pixel Logo">
+			<h1 id="titulo">Timeless Pixel</h1>
 		</header>
 		<aside>
-		<h1>Numero de orden: #<%= numeroOrden %></h1>
-		<p>Fecha: <%= fechaActual %></p>
-		<p>Estado: Pago</p>
-		<p>Metodo de pago: <%= metodoPago %></p>
+			<h1>Numero de orden: #<%= idVenta.id %></h1>
+			<h2>Nombre: <%= idVenta.nombre %></h2>
+			<p></p>
+			<p>Estado: Pago</p>
+			<p></p>
 		</aside>
 		<main>
-		<table id="tabla">
-			<thead>
-			<tr>
-				<th>Producto</th>
-				<th>Precio</th>
-				<th>Cantidad</th>
-				<th>Total</th>
-			</tr>
-			</thead>
-			<tbody>
-			<% carrito.forEach(item => { %>
-				<tr>
-				<td class="product">
-					<p><%= item.name %></p>
-				</td>
-				<td>$<%= item.price.toFixed(2) %></td>
-				<td><%= item.quantity %></td>
-				<td>$<%= (item.price * item.quantity).toFixed(2) %></td>
-				</tr>
-			<% }) %>
-			</tbody>
-		</table>
-		<div class="total-and-back">
-			<p id="total-price">Precio total: $<%= totalPrecio.toFixed(2) %></p>
-			<div>
-			<button id="back-button">Volver</button>
-			<button id="print-button">Imprimir PDF</button>
+			<table id="tabla">
+				<thead>
+					<tr>
+						<th>Producto</th>
+						<th>Precio</th>
+						<th>Cantidad</th>
+						<th>Total</th>
+					</tr>
+				</thead>
+				<tbody>
+					
+				</tbody>
+			</table>
+			<div class="total-and-back">
+				<p id="total-price"></p>
+				<div>
+					<button id="back-button">Volver</button>
+					<button id="print-button">Imprimir PDF</button>
+				</div>
 			</div>
-		</div>
 		</main>
 		<footer>
 		</footer>
@@ -61,4 +40,3 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js"></script>
 	<script src="/scripts_ticket.js"></script>
 </body>
-</html>

@@ -93,4 +93,15 @@ router.patch("/restore/:id", async (req, res) => {
     }
 });
 
+router.get("/ultimoid", async (req, res) => {
+    try {
+        const venta = await ventasSequelize.findOne({
+            order: [['id', 'DESC']]
+        });
+        res.status(200).render("ticket", { idVenta : venta });
+    } catch (error) {
+        res.status(404).send(`ERROR: ${error}`);
+    }
+});
+
 module.exports = router;
