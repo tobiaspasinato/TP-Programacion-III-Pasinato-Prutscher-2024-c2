@@ -1,7 +1,6 @@
 class Ticket {
     constructor() {
         this.fechaActual = new Date().toLocaleDateString();
-        this.numeroOrden = Math.floor(Math.random() * 10000) + 1;
         this.metodosPago = ['MercadoPago', 'Efectivo', 'Tarjeta'];
         this.metodoPagoAleatorio = this.metodosPago[Math.floor(Math.random() * this.metodosPago.length)];
         this.carrito = JSON.parse(localStorage.getItem('carrito'));
@@ -66,6 +65,24 @@ class Ticket {
 
             doc.save('ticket.pdf');
         });
+    }
+
+    async cargarProductos() {
+        try {
+            const response = await fetch(`http://localhost:3000/ventas/ultimoid`);
+            const html = await response.text();
+    
+    
+            if (html.trim() === '') {
+                return false; 
+            }
+    
+            document.getElementById('ticket-container').innerHTML = html;
+            return true; 
+        } catch (error) {
+            console.error('Error al cargar los productos:', error);
+            return false; 
+        }
     }
 
     renderCarrito() {

@@ -168,25 +168,21 @@ class UI {
   async cargarProductos(categoria, limit, offset) {
     try {
         const queryString = categoria === 'todos' ? `limit=${limit}&offset=${offset}` : `categoria=${categoria}&limit=${limit}&offset=${offset}`;
-        console.log(`Fetching products with query: ${queryString}`); // Debugging line
         const response = await fetch(`http://localhost:3000/productos/list?${queryString}`);
         const html = await response.text();
-        console.log('Fetched HTML:', html); // Debugging line
 
-        // Check if the response contains products
         if (html.trim() === '') {
-            console.log('No more products to load.');
-            return false; // Indicate that no products were loaded
+            return false; 
         }
 
         this.productList.innerHTML = html;
         this.agregarListenersBotonesCantidadGral();
         this.agregarListenersBotonesAgregarCarrito();
-        this.actualizarBotonesPaginacion(); // Actualiza la visibilidad de los botones de paginación
-        return true; // Indicate that products were loaded
+        this.actualizarBotonesPaginacion(); 
+        return true; 
     } catch (error) {
         console.error('Error al cargar los productos:', error);
-        return false; // Indicate that no products were loaded due to an error
+        return false; 
     }
 }
 
@@ -194,12 +190,11 @@ renderizarProductos() {
   this.nextPageBtn.addEventListener('click', async () => {
       const limit = this.itemsPorPagina;
       const offset = this.paginaActual * limit;
-      console.log(`Next page clicked. Current page: ${this.paginaActual + 1}, Limit: ${limit}, Offset: ${offset}`); // Debugging line
 
       const productsLoaded = await this.cargarProductos('todos', limit, offset);
       if (productsLoaded) {
           this.paginaActual++;
-          this.actualizarBotonesPaginacion(); // Actualiza la visibilidad de los botones de paginación
+          this.actualizarBotonesPaginacion(); 
       }
   });
 
