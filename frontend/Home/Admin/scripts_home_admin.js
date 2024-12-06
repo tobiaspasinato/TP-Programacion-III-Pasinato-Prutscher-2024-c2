@@ -106,8 +106,35 @@ class GestorProductos {
             event.preventDefault();
             window.location.href = "../home.html";
         });
+        // Event listener para el enlace de Excel
+        document.getElementById('excel').addEventListener('click', (event) => {
+            event.preventDefault();
+            this.exportarAExcel();
+        });
     }
+    async exportarAExcel() {
+        try {
+            // Datos de ejemplo, reemplaza esto con tus datos reales
+            const respuesta = await fetch("http://localhost:3000/ventas/list");
+            if(!respuesta.ok)
+            {
+                throw new Error("Error en la respuesta del servidor");
+            }
+            const datos = await respuesta.json();
+            
+            // Crea una hoja de trabajo
+            const hojaDeTrabajo = XLSX.utils.json_to_sheet(datos);
 
+            // Crea un libro de trabajo
+            const libroDeTrabajo = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(libroDeTrabajo, hojaDeTrabajo, 'Productos');
+
+            // Genera el archivo Excel
+            XLSX.writeFile(libroDeTrabajo, 'productos.xlsx');
+        } catch (error) {
+            console.error('Error al cargar los productos:', error);
+        }
+    }
     // Renderiza la lista de productos basada en la página actual y el filtro
     renderizarProductos() {
         const listaProductos = document.getElementById('product-list');

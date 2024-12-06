@@ -154,7 +154,6 @@ class UI {
       localStorage.setItem('Total', JSON.stringify(total));
       window.location.href = "./Ticket/ticket.html";
       cargarVentas();
-      alert("Cargando ventas");
     });
 
     this.filtrarProductos('todos');
