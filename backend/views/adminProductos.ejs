@@ -1,13 +1,15 @@
 <% productos.forEach(producto => { %>
 	<div class="col-md-4">
 		<div class="card mb-4 shadow-sm">
-			<img src="http://localhost:<%= process.env.PORT %>/img/<%= producto.imagen%>" class="card-img-top" alt="${producto.nombre}">
+			<img src="http://localhost:<%= process.env.PORT %>/img/<%= producto.imagen %>" class="card-img-top" alt="<%= producto.nombre %>">
 			<div class="card-body">
-				<h5 class="card-title">${producto.nombre}</h5>
-				<p class="card-text">$${producto.precio}</p>
+				<h5 class="card-title"><%= producto.nombre %></h5>
+				<p class="card-text"><%= producto.precio %></p>
+				<p class="card-text"><%= producto.eliminado %></p>
 				<div class="d-flex justify-content-between align-items-center">
-					<button class="btn btn-sm btn-primary" onclick="gestorProductos.editarProducto(producto.id)" id="modificar">Modificar</button>
-					<button class="btn btn-sm btn-danger" id="eliminarProducto(producto.id)">Eliminar</button>
+					<button class="btn btn-sm btn-primary" onclick="modificarDatos(producto.id)" id="modificar">Modificar</button>
+					<button class="btn btn-sm btn-danger" onclick="borrarDatos(producto.id)">Eliminar</button>
+					<button class="btn btn-sm btn-sm" onclick="activarDatos(producto.id)">Restablecer</button>
 				</div>
 			</div>
 		</div>
