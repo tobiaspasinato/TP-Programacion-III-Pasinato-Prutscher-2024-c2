@@ -153,6 +153,8 @@ class UI {
       const total = this.carrito.items.reduce((acc, item) => acc + item.total, 0);
       localStorage.setItem('Total', JSON.stringify(total));
       window.location.href = "./Ticket/ticket.html";
+      cargarVentas();
+      alert("Cargando ventas");
     });
 
     this.filtrarProductos('todos');
@@ -375,13 +377,9 @@ renderizarProductos() {
 
 async function cargarVentas() {
   //editar para que tome el local storage
-  const nombre = "pepe";
-  const total = 100000;
-  const productos = [
-      {"id":1, "frita": "holi2", "cantidad": 3, "papa": "holi"},
-      {"id":2, "cantidad":4}
-  ];
-
+  const nombre = localStorage.getItem('nombreUsuario');
+  const total = localStorage.getItem('Total');
+  const productos = localStorage.getItem('carrito');
 
   const datos = {
       nombre: nombre,
