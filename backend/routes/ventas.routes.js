@@ -104,4 +104,13 @@ router.get("/ultimoid", async (req, res) => {
     }
 });
 
+router.delete("/destroy/:id", async (req, res) => {
+    try {
+        const resultado = await ventasSequelize.destroy({ where: { id: req.params.id } });
+        res.status(200).send("Venta eliminada permanentemente!");
+    } catch (error) {
+        res.status(404).send(`ERROR: ${error}`);
+    }
+});
+
 module.exports = router;
