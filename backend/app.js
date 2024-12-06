@@ -54,6 +54,9 @@ app.use('/productos', productosRoutes);
 const ventasRoutes = require('./routes/ventas.routes.js');
 app.use('/ventas', ventasRoutes);
 
+const passwordRoutes = require('./routes/password.routes.js');
+app.use('/password', passwordRoutes);
+
 app.listen(process.env.PORT, () => {
     console.log(`Server is running on port ${process.env.PORT}`);
 });
