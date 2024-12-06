@@ -44,7 +44,6 @@ class Ticket {
             const response = await fetch(`http://localhost:3000/ventas/ultimoid`);
             const html = await response.text();
     
-    
             if (html.trim() === '') {
                 return false; 
             }

@@ -32,6 +32,13 @@ class GestorProductos {
 
     // Configura los event listeners para varios elementos de la interfaz de usuario
     initEventListeners() {
+        const form = document.getElementById('nuevo-producto-form');
+        console.log(form);
+        document.getElementById('nuevo-link').addEventListener('click', function(event) {
+            event.preventDefault(); 
+            document.getElementById('nuevo-producto-form').style.display = 'block';
+        });
+        
         document.querySelector(".expand-btn").addEventListener("click", () => {
             document.body.classList.toggle("collapsed");
         });
@@ -44,6 +51,9 @@ class GestorProductos {
                 elem.classList.add("active");
                 this.filtrarProductos(categoria);
                 document.getElementById("pagar-container").classList.toggle('d-none', categoria !== 'carrito');
+                if(categoria !== 'nuevo'){
+                    document.getElementById('nuevo-producto-form').style.display = 'none';
+                }
             });
         });
 
@@ -104,7 +114,6 @@ class GestorProductos {
     renderizarProductos() {
         const listaProductos = document.getElementById('product-list');
         listaProductos.innerHTML = '';
-        document.getElementById('nuevo-producto-form').innerHTML = ''; // Limpia el formulario de nuevo producto
         const inicio = (this.paginaActual - 1) * this.itemsPorPagina;
         const fin = inicio + this.itemsPorPagina;
         const productosAMostrar = this.productosFiltrados.slice(inicio, fin);
@@ -144,134 +153,19 @@ class GestorProductos {
             this.crearFormularioNuevoProducto();
             return;
         }
+        if(categoria !== 'nuevo'){
+            document.getElementById('nuevo-producto-form').style.display = 'none';
+        }
         this.productosFiltrados = categoria === 'todos' ? this.productos : this.productos.filter(producto => producto.categoria === categoria);
         this.paginaActual = 1;
         this.renderizarProductos();
     }
 
     // Crea el formulario para agregar un nuevo producto
-    crearFormularioNuevoProducto() {
-        const formContainer = document.getElementById('nuevo-producto-form');
-        formContainer.innerHTML = `
-            <div class="card mx-auto" style="max-width: 800px;">
-                <div class="card-body">
-                    <h5 class="card-title">Nuevo Producto</h5>
-                    <form id="newProductForm" class="d-flex flex-column" enctype="multipart/form-data">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="productName" class="form-label">Nombre del Producto</label>
-                                    <input type="text" class="form-control" name="nombre" id="nombre" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="productPrice" class="form-label">Precio</label>
-                                    <input type="number" class="form-control" name="precio" id="precio" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="productType" class="form-label" name="tipo" id="tipo">Tipo</label>
-                                    <select class="form-control" id="productType" required>
-                                        <option value="Consola">Consola</option>
-                                        <option value="Juego">Juego</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="productImage" class="form-label">Imagen</label>
-                                    <input type="file" class="form-control" name="imagen" id="imagen" required>
-                                </div>
-                                <img id="imagePreview" src="" alt="Vista previa de la imagen" class="img-thumbnail mb-3" style="display: none; width: 100%; height: 300px; object-fit: cover;">
-                            </div>
-                        </div>
-                        <div class="d-flex justify-content-center">
-                            <button type="submit" class="btn btn-primary">Agregar Producto</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        `;
-
-        const productImageInput = document.getElementById('productImage');
-        const imagePreview = document.getElementById('imagePreview');
-
-        productImageInput.addEventListener('input', () => {
-            const url = productImageInput.value;
-            if (url) {
-                imagePreview.src = url;
-                imagePreview.style.display = 'block';
-            } else {
-                imagePreview.style.display = 'none';
-            }
-        });        
-    }
+    crearFormularioNuevoProducto() {    }
 
     // Crea el formulario para editar un producto existente
     editarProductoForm(producto) {
-        const formContainer = document.getElementById('nuevo-producto-form');
-        formContainer.innerHTML = `
-            <div class="modal fade show" id="productModal" tabindex="-1" role="dialog" style="display: block; background: rgba(0, 0, 0, 0.5);">
-                <div class="modal-dialog modal-lg" role="document">
-                    <div class="modal-content bg-dark text-light">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Modificar Producto</h5>
-                            <button type="button" class="btn-close" aria-label="Close" onclick="gestorProductos.cerrarModal()" style="filter: invert(1);"></button>
-                        </div>
-                        <div class="modal-body">
-                            <form id="editProductForm" class="d-flex flex-column">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="mb-3">
-                                            <label for="editProductName" class="form-label">Nombre del Producto</label>
-                                            <input type="text" class="form-control bg-dark text-light" id="editProductName" value="${producto.nombre}" required>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="editProductPrice" class="form-label">Precio</label>
-                                            <input type="number" class="form-control bg-dark text-light" id="editProductPrice" value="${producto.precio}" required>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="editProductType" class="form-label">Tipo</label>
-                                            <select class="form-control bg-dark text-light" id="editProductType" required>
-                                                <option value="consola" ${producto.categoria === 'consolas' ? 'selected' : ''}>Consola</option>
-                                                <option value="videojuego" ${producto.categoria === 'videojuegos' ? 'selected' : ''}>Videojuego</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="mb-3">
-                                            <label for="editProductImage" class="form-label">Imagen (URL)</label>
-                                            <input type="url" class="form-control bg-dark text-light" id="editProductImage" value="${producto.imagen}" required>
-                                        </div>
-                                        <img id="editImagePreview" src="${producto.imagen}" alt="Vista previa de la imagen" class="img-thumbnail mb-3" style="display: block; width: 100%; height: 300px; object-fit: cover;">
-                                    </div>
-                                </div>
-                                <div class="d-flex justify-content-center">
-                                    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        `;
-
-        const productImageInput = document.getElementById('editProductImage');
-        const imagePreview = document.getElementById('editImagePreview');
-
-        productImageInput.addEventListener('input', () => {
-            const url = productImageInput.value;
-            if (url) {
-                imagePreview.src = url;
-                imagePreview.style.display = 'block';
-            } else {
-                imagePreview.style.display = 'none';
-            }
-        });
-
-        document.getElementById('editProductForm').addEventListener('submit', (event) => {
-            event.preventDefault();
-            this.actualizarProducto(producto);
-            this.cerrarModal();
-        });
     }
 
     // Cierra el modal

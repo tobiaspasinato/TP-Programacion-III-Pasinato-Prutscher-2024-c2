@@ -395,6 +395,15 @@ body.dark #paginacion button:hover {
     height: 100%;
 }
 
+#nuevo-producto-form {
+    display: none;
+}
+
+#edit-producto-form {
+    display: none;
+    background: rgba(0, 0, 0, 0.5);
+}
+
 /* Responsividad */
 @media (max-width: 1000px) {
     .col-md-4 {

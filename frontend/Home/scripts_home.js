@@ -51,15 +51,7 @@ class UI {
     this.pagarBtn = document.getElementById("pagarBtn");
     this.carritoList = document.getElementById('carrito-list');
     this.carrito = new Carrito();
-    this.productos = [
-      new Producto('Playstation 1', 100, 'https://upload.wikimedia.org/wikipedia/commons/9/95/PSX-Console-wController.png', 'consolas'),
-      new Producto('Playstation 2', 150, 'https://w7.pngwing.com/pngs/98/809/png-transparent-playstation-2-playstation-3-super-nintendo-entertainment-system-video-game-consoles-playstation-2-game-electronics-gadget-thumbnail.png', 'consolas'),
-      new Producto('Playstation 3', 200, 'https://e7.pngegg.com/pngimages/948/199/png-clipart-playstation-3-playstation-2-playstation-4-video-game-consoles-sony-playstation-game-electronics.png', 'consolas'),
-      new Producto('Crash Bandicoot', 60, 'https://i.3djuegos.com/juegos/10692/crash_bandicoot/fotos/ficha/crash_bandicoot-2464077.jpg', 'videojuegos'),
-      new Producto('The Last of Us', 70, 'https://www.portalgames.com.ar/wp-content/uploads/2020/03/The_Last_of_US.jpg', 'videojuegos'),
-      new Producto('EA Sports FC 25', 150, 'https://www.clarin.com/2024/07/17/ORRRfEnDj_720x0__1.jpg', 'videojuegos'),
-      new Producto('Nintendo Switch', 300, 'https://http2.mlstatic.com/D_NQ_NP_845205-MLA70414548864_072023-O.webp', 'consolas')
-    ];
+    this.productos = [    ];
     this.itemsPorPagina = 6;
     this.paginaActual = 1;
     this.productosFiltrados = this.productos;
