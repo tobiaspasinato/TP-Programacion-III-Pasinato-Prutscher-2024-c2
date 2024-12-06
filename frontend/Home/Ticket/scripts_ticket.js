@@ -57,7 +57,7 @@ class Ticket {
     }
 
     renderCarrito() {
-        const tablaBody = document.querySelector('#tabla tbody');
+        const tablaBody = document.getElementById('tabla');
         let totalPrecio = 0;
 
         this.carrito.forEach(item => {
